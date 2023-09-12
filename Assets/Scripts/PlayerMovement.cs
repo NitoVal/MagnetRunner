@@ -27,11 +27,13 @@ public class PlayerMovement : MonoBehaviour
     //Called when instance is loaded in the scene
     private void Awake()
     {
+        //Get Component
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
         grCheck = gameObject.transform.GetChild(0);
         grMask = LayerMask.GetMask("Ground");
 
+        //Initializing Input
         actions = new PlayerInputActions();
         actions.Enable();
         actions.Player.Jump.performed += Jump;
@@ -41,9 +43,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //get input values
         x = actions.Player.Movement.ReadValue<float>();
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
+        //Flip the player when changing x direction
         if (x > 0 && !isFacingRight)
             Flip();
         if (x < 0 && isFacingRight)
@@ -51,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //Move the player horizontally
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
     }
     private void LateUpdate()
@@ -64,12 +69,11 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = !isFacingRight;
         transform.Rotate(0, 180f, 0);
     }
-    private bool isGrounded() { return Physics2D.OverlapCircle(grCheck.position, grCheckRadius, grMask); }
+    private bool isGrounded() { return Physics2D.OverlapCircle(grCheck.position, grCheckRadius, grMask); } //Check if the GroundCheck hits the ground
     private void Jump(InputAction.CallbackContext obj)
     {
-        //play animation
         if (isGrounded())
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = Vector2.up * jumpForce;        //play animation
     }
     private void Crouch(InputAction.CallbackContext obj)
     {

@@ -28,13 +28,13 @@ public class PlayerMagnet : MonoBehaviour
         if (hit.collider != null)
         {
             //Check if layer of hit object is different of gameobject
-            if (true)
+            if (LayerMask.LayerToName(hit.collider.gameObject.layer) == LayerMask.LayerToName(gameObject.layer))
             {
-                //Attract object
+                hit.collider.attachedRigidbody.AddForce(dir * 100f, ForceMode2D.Force);
             }
             else
             {
-                //Repulse gameobject
+                //Attract
             }
         }
     }
