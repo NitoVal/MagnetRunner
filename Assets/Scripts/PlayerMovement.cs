@@ -73,7 +73,8 @@ public class PlayerMovement : MonoBehaviour
     private void Jump(InputAction.CallbackContext obj)
     {
         if (isGrounded())
-            rb.velocity = Vector2.up * jumpForce;        //play animation
+            rb.velocity = Vector2.up * jumpForce;
+        //play animation
     }
     private void Crouch(InputAction.CallbackContext obj)
     {

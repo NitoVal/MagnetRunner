@@ -38,7 +38,7 @@
                     "id": "3a261544-b564-4079-b8f8-59aeca6d7b81",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.1,pressPoint=0.5)",
                     "initialStateCheck": false
                 },
                 {
@@ -122,7 +122,7 @@
                     "name": "",
                     "id": "d2749c27-b679-4df0-a7ca-00c8db8a6637",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Hold(duration=0.1,pressPoint=0.5)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Activate magnet",
