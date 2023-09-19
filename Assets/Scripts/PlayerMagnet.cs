@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerMagnet : MonoBehaviour
 {
     PlayerInput input;
-    public PlayerInputActions actions;
 
     [SerializeField] Transform holder;
     float range = 5f, lerpSpeed = 100f, throwForce = 20f, pushForce = 200f;
@@ -16,18 +15,17 @@ public class PlayerMagnet : MonoBehaviour
     void Awake()
     {
         //Get Input component
-        input = GetComponent<PlayerInput>();
-        actions = new PlayerInputActions();
-        actions.Enable();
-        actions.Player.SwitchPolarity.performed += SwitchPolarity;
-        actions.Player.Activatemagnet.performed += Activatemagnet;
-        actions.Player.Activatemagnet.canceled += StopMagnet;
+        input = GetComponent<PlayerInput>();       
+        
+        InputManager.onSwitchPolarity += SwitchPolarity;
+        InputManager.onMagnetOn += Activatemagnet;
+        InputManager.onMagnetOff += StopMagnet;
 
         //Set layer of current gameObject
         gameObject.layer = LayerMask.NameToLayer("N");
     }
 
-    private void StopMagnet(InputAction.CallbackContext obj)
+    private void StopMagnet()
     {
         if (grabbedRB)
         {
@@ -38,7 +36,7 @@ public class PlayerMagnet : MonoBehaviour
         }
     }
 
-    private void Activatemagnet(InputAction.CallbackContext obj)
+    private void Activatemagnet()
     {
         Vector2 dir = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - holder.position;
         RaycastHit2D hit = Physics2D.Raycast(holder.position, dir, range);
@@ -58,7 +56,7 @@ public class PlayerMagnet : MonoBehaviour
         }
     }
 
-    private void SwitchPolarity(InputAction.CallbackContext obj)
+    private void SwitchPolarity()
     {
         if (LayerMask.LayerToName(gameObject.layer) != "S")
             gameObject.layer = LayerMask.NameToLayer("S");

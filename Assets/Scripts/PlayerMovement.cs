@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     LayerMask grMask;
 
     PlayerInput input;
-    public PlayerInputActions actions;
 
     Vector2 mousePos;
     [SerializeField] Transform point;
@@ -34,17 +33,14 @@ public class PlayerMovement : MonoBehaviour
         grMask = LayerMask.GetMask("Ground");
 
         //Initializing Input
-        actions = new PlayerInputActions();
-        actions.Enable();
-        actions.Player.Jump.performed += Jump;
-        actions.Player.Crouch.performed += Crouch;
-        actions.Player.Crouch.canceled += CancelCrouch;
+        InputManager.onMove += OnMovePlayer;
+        InputManager.onJumpPressed += Jump;
+        InputManager.onCrouchPressed += Crouch;
+        InputManager.onCrouchCanceled += CancelCrouch;
     }
 
     private void Update()
-    {
-        //get input values
-        x = actions.Player.Movement.ReadValue<float>();
+    {   
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         //Flip the player when changing x direction
@@ -64,24 +60,28 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg - 90f;
         point.rotation = Quaternion.Euler(0f,0f,angle);
     }
+    private void OnMovePlayer(float dir)
+    {
+        x = dir;
+    }
     private void Flip()
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0, 180f, 0);
     }
     private bool isGrounded() { return Physics2D.OverlapCircle(grCheck.position, grCheckRadius, grMask); } //Check if the GroundCheck hits the ground
-    private void Jump(InputAction.CallbackContext obj)
+    private void Jump()
     {
         if (isGrounded())
             rb.velocity = Vector2.up * jumpForce;
         //play animation
     }
-    private void Crouch(InputAction.CallbackContext obj)
+    private void Crouch()
     {
         //play animation
         transform.localScale -= new Vector3(0, 0.5f, 0);
     }
-    private void CancelCrouch(InputAction.CallbackContext obj)
+    private void CancelCrouch()
     {
         //play animation
         transform.localScale += new Vector3(0,.5f,0);
