@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     float speed = 10f;
     float jumpForce = 16f;
-    bool isFacingRight = true;
+    bool isFacingRight = true;  
 
     Rigidbody2D rb;
 
@@ -38,11 +38,9 @@ public class PlayerMovement : MonoBehaviour
         InputManager.onCrouchPressed += Crouch;
         InputManager.onCrouchCanceled += CancelCrouch;
     }
-
     private void Update()
     {   
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
         //Flip the player when changing x direction
         if (x > 0 && !isFacingRight)
             Flip();
@@ -60,10 +58,7 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg - 90f;
         point.rotation = Quaternion.Euler(0f,0f,angle);
     }
-    private void OnMovePlayer(float dir)
-    {
-        x = dir;
-    }
+    private void OnMovePlayer(float dir) { x = dir; }
     private void Flip()
     {
         isFacingRight = !isFacingRight;

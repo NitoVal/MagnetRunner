@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class MovingPlatform : MonoBehaviour
     private int currentWaypointIndex = 0;
 
     public float speed;
+    public float intervalBetweenPoint;
+    float temp;
     Rigidbody2D p;
     void Update()
     {
@@ -20,24 +23,29 @@ public class MovingPlatform : MonoBehaviour
         }
         if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
         {
-            currentWaypointIndex++;
-            if (currentWaypointIndex >= waypoints.Length)
-                currentWaypointIndex = 0;
+            if (temp <= intervalBetweenPoint)
+                temp += Time.deltaTime;
+            else
+            {
+                temp = 0;
+                currentWaypointIndex++;
+                if (currentWaypointIndex >= waypoints.Length)
+                    currentWaypointIndex = 0;
+            }
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.transform.SetParent(transform);
             p = collision.attachedRigidbody;
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.transform.SetParent(null);
             p = null;
