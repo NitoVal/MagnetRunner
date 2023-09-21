@@ -12,6 +12,7 @@ public class PlayerMagnet : MonoBehaviour
     float range = 5f, lerpSpeed = 100f, throwForce = 20f, pushForce = 200f;
 
     Rigidbody2D grabbedRB;
+    Collider2D grabbedCollider;
     void Awake()
     {
         //Get Input component
@@ -23,12 +24,17 @@ public class PlayerMagnet : MonoBehaviour
 
         //Set layer of current gameObject
         gameObject.layer = LayerMask.NameToLayer("N");
+
+
     }
 
     private void StopMagnet()
     {
         if (grabbedRB)
         {
+            grabbedCollider.isTrigger = false;
+            grabbedCollider = null;
+
             grabbedRB.isKinematic = false;
             grabbedRB.interpolation = RigidbodyInterpolation2D.None;
             grabbedRB.AddForce(holder.up * throwForce, ForceMode2D.Impulse);
@@ -68,6 +74,9 @@ public class PlayerMagnet : MonoBehaviour
         //if the grabbed object has a Rigidbody2D pull the object towards the holder 
         if (grabbedRB)
         {
+            grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
+            grabbedCollider.isTrigger = true;
+
             grabbedRB.isKinematic = true;
             grabbedRB.velocity = Vector2.zero;
             grabbedRB.interpolation = RigidbodyInterpolation2D.Interpolate;
