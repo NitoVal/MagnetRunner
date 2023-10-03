@@ -36,9 +36,6 @@ public class SettingMenu : MonoBehaviour
         // Because dropdown method AddOption() takes string as argument, create a list of string that will hold resolution as string value
         List<string> options = new List<string>();
 
-        // Clear any existing relolution in the resolutionDropdown to make sure it is empty before adding new resolutions
-        resolutionDropdown.ClearOptions();
-
         // For each element in the resolution array
         for (int i = 0; i < resolution.Length; i++)
         {
@@ -51,6 +48,9 @@ public class SettingMenu : MonoBehaviour
                 currentResolutionIndex = i;
             }
         }
+
+        // Clear any existing relolution in the resolutionDropdown to make sure it is empty before adding new resolutions
+        resolutionDropdown.ClearOptions();
 
         // Add all the string in the list in resolutionDropdown
         resolutionDropdown.AddOptions(options);

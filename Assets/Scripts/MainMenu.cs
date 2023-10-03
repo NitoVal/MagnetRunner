@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] levelLoader levelLoader;
+
     // When Play Game button is clicked
     public void PlayGame()
     {
         // Move to the next scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        levelLoader.LoadNextLevel();
     }
 
     // When Quite Game button is clicked
