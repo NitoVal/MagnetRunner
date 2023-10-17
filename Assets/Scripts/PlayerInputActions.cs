@@ -71,6 +71,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""ceaafb0b-643a-4d69-8580-2e84bff1c087"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +159,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Activate magnet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e13b93a8-b7de-4d29-9a26-3ab17e9200fd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -180,6 +200,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Activatemagnet = m_Player.FindAction("Activate magnet", throwIfNotFound: true);
         m_Player_SwitchPolarity = m_Player.FindAction("Switch Polarity", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +267,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Activatemagnet;
     private readonly InputAction m_Player_SwitchPolarity;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -255,6 +277,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Activatemagnet => m_Wrapper.m_Player_Activatemagnet;
         public InputAction @SwitchPolarity => m_Wrapper.m_Player_SwitchPolarity;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -279,6 +302,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SwitchPolarity.started += instance.OnSwitchPolarity;
             @SwitchPolarity.performed += instance.OnSwitchPolarity;
             @SwitchPolarity.canceled += instance.OnSwitchPolarity;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -298,6 +324,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @SwitchPolarity.started -= instance.OnSwitchPolarity;
             @SwitchPolarity.performed -= instance.OnSwitchPolarity;
             @SwitchPolarity.canceled -= instance.OnSwitchPolarity;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -331,5 +360,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnActivatemagnet(InputAction.CallbackContext context);
         void OnSwitchPolarity(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
