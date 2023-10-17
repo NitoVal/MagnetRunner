@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     float x; 
 
     float speed = 10f;
-    float jumpForce = 16f;
+    float jumpForce = 20f;
     bool isFacingRight = true;  
 
     Rigidbody2D rb;
@@ -80,5 +80,9 @@ public class PlayerMovement : MonoBehaviour
     {
         //play animation
         transform.localScale += new Vector3(0,.5f,0);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(grCheck.position, grCheckRadius);
     }
 }
