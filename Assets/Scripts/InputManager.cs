@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
     public static event Action onMagnetOn;
     public static event Action onMagnetOff;
     public static event Action onInteract;
+    public static event Action onPause;
 
     void OnEnable()
     {
@@ -36,6 +37,13 @@ public class InputManager : MonoBehaviour
         actions.Player.Activatemagnet.canceled += OnStopMagnet;
 
         actions.Player.Interact.performed += OnInteract;
+
+        actions.Player.Pause.performed += OnPause;
+    }
+
+    private void OnPause(InputAction.CallbackContext obj)
+    {
+        onPause?.Invoke();
     }
     private void OnInteract(InputAction.CallbackContext obj)
     {
