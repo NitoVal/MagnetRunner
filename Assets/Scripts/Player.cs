@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
             {
                 if (door.keyType == Pkey.GetKeyType() && !door.isOpen)
                 {
+                    Pkey.gameObject.SetActive(true);
+                    Destroy(Pkey.gameObject);
+
                     Pkey = null;
                     door.OpenDoor();
                 }
