@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    float interactRadius = 1f;
+    /// <summary>
+    /// TODO:
+    /// Change so that the player can only have 1 key
+    /// </summary>
     [SerializeField] List<Key.KeyType> keyList;
     LayerMask interactLayer;
     void Awake()
@@ -42,7 +47,7 @@ public class Player : MonoBehaviour
     }
     void Interact()
     {
-        Collider2D interactable = Physics2D.OverlapCircle(transform.position, 1f, interactLayer);
+        Collider2D interactable = Physics2D.OverlapCircle(transform.position, interactRadius, interactLayer);
         if (interactable)
         {
             ButtonInteractable button = interactable.GetComponent<ButtonInteractable>();

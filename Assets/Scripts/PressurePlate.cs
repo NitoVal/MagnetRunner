@@ -6,18 +6,25 @@ using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
-    public static event Action ToggleOn;
-    public static event Action ToggleOff;
+    public static event Action<int?> onPressingPlate;
+    public static event Action<int?> onReleasingPlate;
     public int id;
     //public Animator animator;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ToggleOn?.Invoke();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            onPressingPlate?.Invoke(id);
+        }
         //animator.SetBool("OnPressed", true);
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        ToggleOff?.Invoke();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            onReleasingPlate?.Invoke(id);
+        }
+
         //animator.SetBool("OnPressed", false);
     }
 }

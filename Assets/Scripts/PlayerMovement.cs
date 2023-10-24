@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //play animation
         transform.localScale -= new Vector3(0, 0.5f, 0);
-    }
+    } //TO REDO
     private void CancelCrouch()
     {
         //play animation

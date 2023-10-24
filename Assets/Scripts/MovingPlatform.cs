@@ -8,8 +8,11 @@ public class MovingPlatform : MonoBehaviour
     public GameObject[] waypoints;
     private int currentWaypointIndex = 0;
 
+    public bool isAutomatic;
+
     public float speed;
     public float intervalBetweenPoint;
+
     float temp;
     Rigidbody2D p;
     void Update()

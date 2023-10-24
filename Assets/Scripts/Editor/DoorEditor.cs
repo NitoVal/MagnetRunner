@@ -15,6 +15,7 @@ public class DoorEditor : Editor
 
         Door door = (Door)target;
         door.doorType = (Door.DoorType)EditorGUILayout.EnumPopup("Door type", door.doorType);
+        EditorGUILayout.Space();
         switch (door.doorType) //only show field based on doorType
         {
             case Door.DoorType.PressurePlate:
@@ -25,7 +26,7 @@ public class DoorEditor : Editor
                 break;
             case Door.DoorType.TriggerArea:
                 EditorGUILayout.BeginHorizontal();
-                door.triggerArea = (Collider2D)EditorGUILayout.ObjectField(door.triggerArea, typeof(Collider2D), true);//?????????
+                door.triggerArea = (Collider2D)EditorGUILayout.ObjectField(door.triggerArea, typeof(Collider2D), true);
                 EditorGUILayout.EndHorizontal();
                 break;
             case Door.DoorType.Button:

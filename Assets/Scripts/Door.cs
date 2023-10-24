@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IDoor
 {
-    //private Animator animator;
     public enum DoorType
     {
         PressurePlate,
@@ -13,26 +12,35 @@ public class Door : MonoBehaviour, IDoor
         Button
     }
     [HideInInspector] public DoorType doorType;
-
     [HideInInspector] public Key.KeyType keyType; //only when door type is a Key
     [HideInInspector] public Collider2D triggerArea; //only when door type is a TriggerArea
     [HideInInspector] public int id; //only when door type is a Button or a PressurePlate
 
     [HideInInspector] public bool isOpen = false;
+
+    Vector2 startPos;
+    public Vector2 endPos;
     void Awake()
     {
-        //animator = GetComponent<Animator>();
-
+        startPos = transform.position;
+        endPos.x = transform.position.x;
         if (doorType is DoorType.PressurePlate)
         {
-            PressurePlate.ToggleOn += OpenDoor;
-            PressurePlate.ToggleOff += CloseDoor;
+            PressurePlate.onPressingPlate += OpenDoor;
+            PressurePlate.onReleasingPlate += CloseDoor;
         }
         if (doorType is DoorType.Button)
         {
             ButtonInteractable.OnButtonActivated += OpenDoor;
             ButtonInteractable.OnButtonDeactivated += CloseDoor;
         }
+    }
+    private void Update()
+    {
+        if (isOpen)
+            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * 10f);
+        else
+            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * 10f);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -53,18 +61,31 @@ public class Door : MonoBehaviour, IDoor
                 CloseDoor();
             }
         }
-
     }
+    public void OpenDoor(int? id)
+    {
+        if (this.id != id)
+            return;
+
+        isOpen = true;
+        Debug.Log($"Opening Door: {gameObject.name}");
+    } //only for pressure plate and button door type
     public void OpenDoor()
     {
         isOpen = true;
         Debug.Log($"Opening Door: {gameObject.name}");
-        //animator.SetBool("Open", isOpen);
-    }
+    } //for all types of doors
+    public void CloseDoor(int? id)
+    {
+        if (this.id != id)
+            return;
+
+        isOpen = false;
+        Debug.Log($"Closing Door: {gameObject.name}");
+    } //only for pressure plate and button door type
     public void CloseDoor()
     {
         isOpen = false;
         Debug.Log($"Closing Door: {gameObject.name}");
-        //animator.SetBool("Open", isOpen);
-    }
+    } //for all types of doors
 }
