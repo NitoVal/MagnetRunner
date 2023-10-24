@@ -26,20 +26,28 @@ public class PlayerMovement : MonoBehaviour
     //Called when instance is loaded in the scene
     private void Awake()
     {
-        //Get Component
+        //Get components
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
         grCheck = gameObject.transform.GetChild(0);
         grMask = LayerMask.GetMask("Ground");
 
-        //Initializing Input
+        //Initializing input
         InputManager.onMove += OnMovePlayer;
         InputManager.onJumpPressed += Jump;
         InputManager.onCrouchPressed += Crouch;
         InputManager.onCrouchCanceled += CancelCrouch;
     }
+    void OnDisable()
+    {
+        InputManager.onMove -= OnMovePlayer;
+        InputManager.onJumpPressed -= Jump;
+        InputManager.onCrouchPressed -= Crouch;
+        InputManager.onCrouchCanceled -= CancelCrouch;
+    }
     private void Update()
     {   
+        //Get mouse position 
         mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         //Flip the player when changing x direction
         if (x > 0 && !isFacingRight)
@@ -54,9 +62,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void LateUpdate()
     {
+        //Rotate holder object
         Vector2 dir = mousePos - (Vector2)point.position;
-        float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg - 90f;
-        point.rotation = Quaternion.Euler(0f,0f,angle);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+        point.rotation = Quaternion.Euler(0f, 0f, angle);
     }
     private void OnMovePlayer(float dir) { x = dir; }
     private void Flip()

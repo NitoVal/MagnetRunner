@@ -12,19 +12,12 @@ public class PressurePlate : MonoBehaviour
     //public Animator animator;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            onPressingPlate?.Invoke(id);
-        }
-        //animator.SetBool("OnPressed", true);
+        onPressingPlate?.Invoke(id);
+        //animator.SetBool("isPressed", true);
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            onReleasingPlate?.Invoke(id);
-        }
-
-        //animator.SetBool("OnPressed", false);
+        onReleasingPlate?.Invoke(id);
+        //animator.SetBool("isPressed", false);
     }
 }

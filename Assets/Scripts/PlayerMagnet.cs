@@ -9,7 +9,7 @@ public class PlayerMagnet : MonoBehaviour
     PlayerInput input;
 
     [SerializeField] Transform holder;
-    float range = 5f, lerpSpeed = 20f, throwForce = 25f, pushForce = 200f;
+    float range = 5f, lerpSpeed = 10f, throwForce = 25f, pushForce = 200f;
 
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;
@@ -26,22 +26,13 @@ public class PlayerMagnet : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("N");
 
         //set color of player based on polarity
-        if (LayerMask.LayerToName(gameObject.layer) == "S")
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        else
-            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
     }
-    private void StopMagnet()
+    private void OnDisable()
     {
-        if (grabbedRB)
-        {
-            grabbedRB.transform.SetParent(null);
-
-            grabbedRB.isKinematic = false;
-            grabbedRB.interpolation = RigidbodyInterpolation2D.None;
-            grabbedRB.AddForce(holder.up * throwForce, ForceMode2D.Impulse);
-            grabbedRB = null;
-        }
+        InputManager.onSwitchPolarity -= SwitchPolarity;
+        InputManager.onMagnetOn -= Activatemagnet;
+        InputManager.onMagnetOff -= StopMagnet;
     }
     private void Activatemagnet()
     {
@@ -61,6 +52,18 @@ public class PlayerMagnet : MonoBehaviour
                 grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
                 grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
             }
+        }
+    }
+    private void StopMagnet()
+    {
+        if (grabbedRB)
+        {
+            grabbedRB.transform.SetParent(null);
+
+            grabbedRB.isKinematic = false;
+            grabbedRB.interpolation = RigidbodyInterpolation2D.None;
+            grabbedRB.AddForce(holder.up * throwForce, ForceMode2D.Impulse);
+            grabbedRB = null;
         }
     }
     private void SwitchPolarity()
@@ -100,7 +103,6 @@ public class PlayerMagnet : MonoBehaviour
                 grabbedRB.transform.SetParent(holder.transform);
             }
         }
-
     }
     private void OnDrawGizmos()
     {

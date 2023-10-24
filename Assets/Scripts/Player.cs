@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     float interactRadius = 1f;
-    Key Pkey;
+    public Key Pkey;
     LayerMask interactLayer;
     void Awake()
     {
@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
         interactLayer = LayerMask.GetMask("Interactable");
 
         InputManager.onInteract += Interact;
+    }
+    private void OnDisable()
+    {
+        InputManager.onInteract -= Interact;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,7 +26,6 @@ public class Player : MonoBehaviour
             Pkey = key;
             other.gameObject.SetActive(false);
         }
-
         Door door = other.gameObject.GetComponent<Door>();
         if (door != null && door.doorType is Door.DoorType.Key)
         {
@@ -30,9 +33,6 @@ public class Player : MonoBehaviour
             {
                 if (door.keyType == Pkey.GetKeyType() && !door.isOpen)
                 {
-                    Pkey.gameObject.SetActive(true);
-                    Destroy(Pkey.gameObject);
-
                     Pkey = null;
                     door.OpenDoor();
                 }

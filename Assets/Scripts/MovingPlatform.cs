@@ -14,44 +14,48 @@ public class MovingPlatform : MonoBehaviour
     public float intervalBetweenPoint;
 
     float temp;
-    Rigidbody2D p;
+    public List<Rigidbody2D> rbList;
     void Update()
     {
-        if (p != null)
+        if (rbList != null)
         {
-            if (p.velocity.x != 0)
-                p.gameObject.transform.SetParent(null);
-            else
-                p.gameObject.transform.SetParent(transform);
-        }
-        if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
-        {
-            if (temp <= intervalBetweenPoint)
-                temp += Time.deltaTime;
-            else
+            foreach (Rigidbody2D rbP in rbList)
             {
-                temp = 0;
-                currentWaypointIndex++;
-                if (currentWaypointIndex >= waypoints.Length)
-                    currentWaypointIndex = 0;
+                rbP.interpolation = RigidbodyInterpolation2D.Extrapolate;
+                if (rbP.CompareTag("Player"))
+                {
+                    if (rbP.velocity.x != 0)
+                        rbP.gameObject.transform.SetParent(null);
+                    else
+                        rbP.gameObject.transform.SetParent(transform);
+                }
+            }
+        }
+        if (!isAutomatic)
+        {
+            if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
+            {
+                if (temp <= intervalBetweenPoint)
+                    temp += Time.deltaTime;
+                else
+                {
+                    temp = 0;
+                    currentWaypointIndex++;
+                    if (currentWaypointIndex >= waypoints.Length)
+                        currentWaypointIndex = 0;
+                }
             }
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.transform.SetParent(transform);
-            p = collision.attachedRigidbody;
-        }
+        collision.gameObject.transform.SetParent(transform);
+        rbList.Add(collision.attachedRigidbody);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.transform.SetParent(null);
-            p = null;
-        }
+        collision.gameObject.transform.SetParent(null);
+        rbList.Remove(collision.attachedRigidbody);
     }
 }

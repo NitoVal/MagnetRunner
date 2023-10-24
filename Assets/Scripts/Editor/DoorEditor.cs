@@ -6,9 +6,6 @@ using UnityEngine;
 [CustomEditor(typeof(Door))]
 public class DoorEditor : Editor
 {
-    private void OnEnable()
-    {
-    }
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
