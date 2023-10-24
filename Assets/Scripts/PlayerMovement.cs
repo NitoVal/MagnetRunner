@@ -83,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(grCheck.position, grCheckRadius);
+        //Gizmos.DrawSphere(grCheck.position, grCheckRadius);
     }
+
 }
