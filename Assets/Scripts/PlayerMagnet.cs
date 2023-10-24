@@ -24,6 +24,12 @@ public class PlayerMagnet : MonoBehaviour
 
         //Set layer of current gameObject
         gameObject.layer = LayerMask.NameToLayer("N");
+
+        //set color of player based on polarity
+        if (LayerMask.LayerToName(gameObject.layer) == "S")
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        else
+            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
     }
     private void StopMagnet()
     {
@@ -69,7 +75,6 @@ public class PlayerMagnet : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("N");
             gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         }
-
     }
     private void FixedUpdate()
     {

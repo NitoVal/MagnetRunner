@@ -40,7 +40,6 @@ public class InputManager : MonoBehaviour
 
         actions.Player.Pause.performed += OnPause;
     }
-
     private void OnPause(InputAction.CallbackContext obj)
     {
         onPause?.Invoke();

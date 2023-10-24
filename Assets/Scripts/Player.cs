@@ -5,41 +5,32 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     float interactRadius = 1f;
-    /// <summary>
-    /// TODO:
-    /// Change so that the player can only have 1 key
-    /// </summary>
-    [SerializeField] List<Key.KeyType> keyList;
+    Key Pkey;
     LayerMask interactLayer;
     void Awake()
     {
-        keyList = new List<Key.KeyType>();
-        
+        Pkey = null;
         interactLayer = LayerMask.GetMask("Interactable");
 
         InputManager.onInteract += Interact;
     }
-    public bool ContainKey(Key.KeyType keyType)
-    {
-        return keyList.Contains(keyType);
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Key key = other.GetComponent<Key>();
-        if (key != null)
+        Key key = other.gameObject.GetComponent<Key>();
+        if (key != null && Pkey is null)
         {
-            keyList.Add(key.GetKeyType());
-            Destroy(other.gameObject);
+            Pkey = key;
+            other.gameObject.SetActive(false);
         }
 
-        Door door = other.GetComponent<Door>();
-        if (door != null)
+        Door door = other.gameObject.GetComponent<Door>();
+        if (door != null && door.doorType is Door.DoorType.Key)
         {
-            if (door.doorType is Door.DoorType.Key)
+            if (Pkey != null)
             {
-                if (ContainKey(door.keyType) && !door.isOpen)
+                if (door.keyType == Pkey.GetKeyType() && !door.isOpen)
                 {
-                    keyList.Remove(door.keyType);
+                    Pkey = null;
                     door.OpenDoor();
                 }
             }
@@ -55,10 +46,13 @@ public class Player : MonoBehaviour
                 button.Activate();
 
             LeverInteractable lever = interactable.GetComponent<LeverInteractable>();
-            if (lever != null && !lever.isUp)
-                lever.LeverUp();
-            else
-                lever.LeverDown();
+            if (lever != null)
+            {
+                if (!lever.isUp)
+                    lever.LeverUp();
+                else
+                    lever.LeverDown();
+            }
         }
     }
 }
