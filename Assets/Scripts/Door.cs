@@ -9,7 +9,8 @@ public class Door : MonoBehaviour, IDoor
         PressurePlate,
         Key,
         TriggerArea,
-        Button
+        Button,
+        Lever
     }
     [HideInInspector] public DoorType doorType;
     [HideInInspector] public Key.KeyType keyType; //only when door type is a Key
@@ -33,6 +34,11 @@ public class Door : MonoBehaviour, IDoor
         {
             ButtonInteractable.OnButtonActivated += OpenDoor;
             ButtonInteractable.OnButtonDeactivated += CloseDoor;
+        }
+        if (doorType is DoorType.Lever)
+        {
+            LeverInteractable.OnLeverUp += OpenDoor;
+            LeverInteractable.OnLeverDown += CloseDoor;
         }
     }
     private void Update()

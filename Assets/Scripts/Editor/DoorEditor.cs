@@ -32,6 +32,9 @@ public class DoorEditor : Editor
             case Door.DoorType.Button:
                 door.id = EditorGUILayout.IntField("Id", door.id);
                 break;
+            case Door.DoorType.Lever:
+                door.id = EditorGUILayout.IntField("Id", door.id);
+                break;
             default:
                 break;
         }

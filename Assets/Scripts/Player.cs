@@ -52,9 +52,13 @@ public class Player : MonoBehaviour
         {
             ButtonInteractable button = interactable.GetComponent<ButtonInteractable>();
             if (button != null && !button.isActivated)
-            {
                 button.Activate();
-            }
+
+            LeverInteractable lever = interactable.GetComponent<LeverInteractable>();
+            if (lever != null && !lever.isUp)
+                lever.LeverUp();
+            else
+                lever.LeverDown();
         }
     }
 }

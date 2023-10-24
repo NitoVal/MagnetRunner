@@ -1408,6 +1408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710397298}
   - component: {fileID: 710397297}
+  - component: {fileID: 710397299}
   m_Layer: 8
   m_Name: Lever
   m_TagString: Untagged
@@ -1477,6 +1478,20 @@ Transform:
   - {fileID: 1891770225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710397299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710397296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb51061bc466e941a519787c462e99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  isUp: 0
 --- !u!1 &740571731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,7 +1987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebdea27118818f4db8cc39623aa5a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorType: 3
+  doorType: 4
   keyType: 1
   triggerArea: {fileID: 1233244309}
   id: 0
@@ -2565,6 +2580,7 @@ MonoBehaviour:
   - {fileID: 1892024073}
   - {fileID: 1323391886}
   - {fileID: 1795912219}
+  isAutomatic: 0
   speed: 5
   intervalBetweenPoint: 1
 --- !u!61 &1501486096
@@ -3824,7 +3840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebdea27118818f4db8cc39623aa5a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorType: 0
+  doorType: 1
   keyType: 1
   triggerArea: {fileID: 519076523}
   id: 1
