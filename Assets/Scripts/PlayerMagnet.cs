@@ -25,6 +25,13 @@ public class PlayerMagnet : MonoBehaviour
         //Set layer of current gameObject
         gameObject.layer = LayerMask.NameToLayer("N");
     }
+
+    private void OnDisable()
+    {
+        InputManager.onSwitchPolarity -= SwitchPolarity;
+    }
+
+
     private void StopMagnet()
     {
         if (grabbedRB)
