@@ -10,20 +10,20 @@ public class ButtonInteractable : MonoBehaviour
 
     [HideInInspector] public bool isActivated;
 
-    public static event Action OnButtonActivated;
-    public static event Action OnButtonDeactivated;
+    public static event Action<int?> OnButtonActivated;
+    public static event Action<int?> OnButtonDeactivated;
     //public Animator animator;
     public void Activate()
     {
         isActivated = true;
-        OnButtonActivated?.Invoke();
+        OnButtonActivated?.Invoke(id);
         Invoke("Deactivate", timer);
         //animator.SetBool("Activated", isActivated);
     }
-    void Deactivate()
+    public void Deactivate()
     {
         isActivated = false;
-        OnButtonDeactivated?.Invoke();
+        OnButtonDeactivated?.Invoke(id);
         //animator.SetBool("Activated", isActivated);
     }
 }

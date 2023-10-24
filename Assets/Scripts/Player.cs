@@ -4,37 +4,36 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] List<Key.KeyType> keyList;
+    float interactRadius = 1f;
+    public Key Pkey;
     LayerMask interactLayer;
     void Awake()
     {
-        keyList = new List<Key.KeyType>();
-        
+        Pkey = null;
         interactLayer = LayerMask.GetMask("Interactable");
 
         InputManager.onInteract += Interact;
     }
-    public bool ContainKey(Key.KeyType keyType)
+    private void OnDisable()
     {
-        return keyList.Contains(keyType);
+        InputManager.onInteract -= Interact;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Key key = other.GetComponent<Key>();
-        if (key != null)
+        Key key = other.gameObject.GetComponent<Key>();
+        if (key != null && Pkey is null)
         {
-            keyList.Add(key.GetKeyType());
-            Destroy(other.gameObject);
+            Pkey = key;
+            other.gameObject.SetActive(false);
         }
-
-        Door door = other.GetComponent<Door>();
-        if (door != null)
+        Door door = other.gameObject.GetComponent<Door>();
+        if (door != null && door.doorType is Door.DoorType.Key)
         {
-            if (door.doorType is Door.DoorType.Key)
+            if (Pkey != null)
             {
-                if (ContainKey(door.keyType) && !door.isOpen)
+                if (door.keyType == Pkey.GetKeyType() && !door.isOpen)
                 {
-                    keyList.Remove(door.keyType);
+                    Pkey = null;
                     door.OpenDoor();
                 }
             }
@@ -42,13 +41,20 @@ public class Player : MonoBehaviour
     }
     void Interact()
     {
-        Collider2D interactable = Physics2D.OverlapCircle(transform.position, 1f, interactLayer);
+        Collider2D interactable = Physics2D.OverlapCircle(transform.position, interactRadius, interactLayer);
         if (interactable)
         {
             ButtonInteractable button = interactable.GetComponent<ButtonInteractable>();
             if (button != null && !button.isActivated)
-            {
                 button.Activate();
+
+            LeverInteractable lever = interactable.GetComponent<LeverInteractable>();
+            if (lever != null)
+            {
+                if (!lever.isUp)
+                    lever.LeverUp();
+                else
+                    lever.LeverDown();
             }
         }
     }

@@ -8,10 +8,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] levelLoader levelLoader;
 
     // When Play Game button is clicked
-    public void PlayGame()
+    public void LoadScene(int sceneIndex)
     {
         // Move to the next scene
-        levelLoader.LoadNextLevel();
+        //levelLoader.LoadNextLevel(sceneIndex); A REMETTRE QUAND TRANSITION FIXED
+        SceneManager.LoadScene(sceneIndex);
     }
 
     // When Quite Game button is clicked
@@ -19,5 +20,20 @@ public class MainMenu : MonoBehaviour
     {
         // Close the application
         Application.Quit();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1.0f;
+    }
+
+    public void RestartLevel(int sceneIndex)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
