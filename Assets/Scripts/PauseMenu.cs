@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseCanvas;
     private void Awake()
     {
+        isPaused = false;
         Time.timeScale = 1.0f;
         InputManager.onPause += PauseGame;
     }
@@ -31,8 +32,7 @@ public class PauseMenu : MonoBehaviour
             pauseCanvas.SetActive(isPaused);
         }
     }
-
-    public void RestartLevel(int sceneIndex)
+    public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

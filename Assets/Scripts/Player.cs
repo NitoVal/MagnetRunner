@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
         }
         Door door = other.gameObject.GetComponent<Door>();
-        if (door != null && door.doorType is Door.DoorType.Key)
+        if (door != null && door.doorType is Door.ActivationType.Key)
         {
             if (Pkey != null)
             {

@@ -21,19 +21,4 @@ public class MainMenu : MonoBehaviour
         // Close the application
         Application.Quit();
     }
-
-    public void PauseGame()
-    {
-        Time.timeScale = 0f;
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1.0f;
-    }
-
-    public void RestartLevel(int sceneIndex)
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }
