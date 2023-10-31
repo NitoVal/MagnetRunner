@@ -8,47 +8,62 @@ public class MovingPlatform : MonoBehaviour
     public GameObject[] waypoints;
     private int currentWaypointIndex = 0;
 
+    public bool isAutomatic;
+
     public float speed;
-    public float intervalBetweenPoint;
+    public float intervalBetweenPoint; //in seconds
+
     float temp;
-    Rigidbody2D p;
+    public List<Rigidbody2D> rbList;
+
+    private void Awake()
+    {
+        transform.position = waypoints[0].transform.position;
+    }
     void Update()
     {
-        if (p != null)
+        if (rbList != null)
         {
-            if (p.velocity.x != 0)
-                p.gameObject.transform.SetParent(null);
-            else
-                p.gameObject.transform.SetParent(transform);
-        }
-        if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
-        {
-            if (temp <= intervalBetweenPoint)
-                temp += Time.deltaTime;
-            else
+            foreach (Rigidbody2D rbP in rbList)
             {
-                temp = 0;
-                currentWaypointIndex++;
-                if (currentWaypointIndex >= waypoints.Length)
-                    currentWaypointIndex = 0;
+                rbP.interpolation = RigidbodyInterpolation2D.Extrapolate;
+                if (rbP.velocity.x != 0)
+                    rbP.gameObject.transform.SetParent(null, true);
+                else
+                    rbP.gameObject.transform.SetParent(transform, true);
+            }
+        }
+        if (isAutomatic)
+        {
+            if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
+            {
+                if (temp <= intervalBetweenPoint)
+                    temp += Time.deltaTime;
+                else
+                {
+                    temp = 0;
+                    currentWaypointIndex++;
+                    if (currentWaypointIndex >= waypoints.Length)
+                        currentWaypointIndex = 0;
+                }
             }
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        other.gameObject.transform.SetParent(transform, true);
+        if (other.attachedRigidbody)
         {
-            collision.gameObject.transform.SetParent(transform);
-            p = collision.attachedRigidbody;
+            rbList.Add(other.attachedRigidbody);
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        other.gameObject.transform.SetParent(null, true);
+        if (other.attachedRigidbody)
         {
-            collision.gameObject.transform.SetParent(null);
-            p = null;
+            rbList.Remove(other.attachedRigidbody);
         }
     }
 }
