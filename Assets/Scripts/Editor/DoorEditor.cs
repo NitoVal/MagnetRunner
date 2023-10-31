@@ -11,25 +11,25 @@ public class DoorEditor : Editor
         base.OnInspectorGUI();
 
         Door door = (Door)target;
-        door.doorType = (Door.DoorType)EditorGUILayout.EnumPopup("Door type", door.doorType);
+        door.doorType = (Door.ActivationType)EditorGUILayout.EnumPopup("Door type", door.doorType);
         EditorGUILayout.Space();
         switch (door.doorType) //only show field based on doorType
         {
-            case Door.DoorType.PressurePlate:
+            case Door.ActivationType.PressurePlate:
                 door.id = EditorGUILayout.IntField("Id", door.id);
                 break;
-            case Door.DoorType.Key:
+            case Door.ActivationType.Key:
                 door.keyType = (Key.KeyType)EditorGUILayout.EnumPopup("Key type", door.keyType);
                 break;
-            case Door.DoorType.TriggerArea:
+            case Door.ActivationType.TriggerArea:
                 EditorGUILayout.BeginHorizontal();
                 door.triggerArea = (Collider2D)EditorGUILayout.ObjectField(door.triggerArea, typeof(Collider2D), true);
                 EditorGUILayout.EndHorizontal();
                 break;
-            case Door.DoorType.Button:
+            case Door.ActivationType.Button:
                 door.id = EditorGUILayout.IntField("Id", door.id);
                 break;
-            case Door.DoorType.Lever:
+            case Door.ActivationType.Lever:
                 door.id = EditorGUILayout.IntField("Id", door.id);
                 break;
             default:

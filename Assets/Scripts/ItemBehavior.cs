@@ -15,12 +15,12 @@ public class ItemBehavior : MonoBehaviour
     //Methods
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Collision");
             levelManager.ItemCollected++;
             collectibleNumber.text = levelManager.ItemCollected.ToString();
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

@@ -11,7 +11,7 @@ public class SettingMenu : MonoBehaviour
 {
     // Components' reference needed for the script to execute
     [Header("Components needed")]
-    [SerializeField ]private AudioMixer audioMixer;
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
 
     // Declaration of an array of resolutions

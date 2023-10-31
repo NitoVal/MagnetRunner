@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IDoor
 {
-    public enum DoorType
+    public enum ActivationType
     {
         PressurePlate,
         Key,
@@ -12,30 +12,31 @@ public class Door : MonoBehaviour, IDoor
         Button,
         Lever
     }
-    [HideInInspector] public DoorType doorType;
+    [HideInInspector] public ActivationType doorType;
     [HideInInspector] public Key.KeyType keyType; //only when door type is a Key
     [HideInInspector] public Collider2D triggerArea; //only when door type is a TriggerArea
-    [HideInInspector] public int id; //only when door type is a Button or a PressurePlate
+    [HideInInspector] public int id; //only when door type is a Button, a PressurePlate or a Lever
 
     [HideInInspector] public bool isOpen = false;
 
     Vector2 startPos;
     public Vector2 endPos;
+    
     void Awake()
     {
         startPos = transform.position;
         endPos.x = transform.position.x;
-        if (doorType is DoorType.PressurePlate)
+        if (doorType is ActivationType.PressurePlate)
         {
             PressurePlate.onPressingPlate += OpenDoor;
             PressurePlate.onReleasingPlate += CloseDoor;
         }
-        if (doorType is DoorType.Button)
+        if (doorType is ActivationType.Button)
         {
             ButtonInteractable.OnButtonActivated += OpenDoor;
             ButtonInteractable.OnButtonDeactivated += CloseDoor;
         }
-        if (doorType is DoorType.Lever)
+        if (doorType is ActivationType.Lever)
         {
             LeverInteractable.OnLeverUp += OpenDoor;
             LeverInteractable.OnLeverDown += CloseDoor;
@@ -50,7 +51,7 @@ public class Door : MonoBehaviour, IDoor
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (doorType is DoorType.TriggerArea)
+        if (doorType is ActivationType.TriggerArea)
         {
             if (triggerArea.IsTouching(collision) && collision.CompareTag("Player"))
             {
@@ -60,7 +61,7 @@ public class Door : MonoBehaviour, IDoor
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (doorType is DoorType.TriggerArea)
+        if (doorType is ActivationType.TriggerArea)
         {
             if (collision.CompareTag("Player"))
             {
@@ -75,7 +76,7 @@ public class Door : MonoBehaviour, IDoor
 
         isOpen = true;
         Debug.Log($"Opening Door: {gameObject.name}");
-    } //only for pressure plate and button door type
+    } //only for pressure plate, button and lever door type
     public void OpenDoor()
     {
         isOpen = true;
@@ -88,7 +89,7 @@ public class Door : MonoBehaviour, IDoor
 
         isOpen = false;
         Debug.Log($"Closing Door: {gameObject.name}");
-    } //only for pressure plate and button door type
+    } //only for pressure plate, button and lever door type
     public void CloseDoor()
     {
         isOpen = false;
