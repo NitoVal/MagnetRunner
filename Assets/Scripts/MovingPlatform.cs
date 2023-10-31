@@ -43,11 +43,13 @@ public class MovingPlatform : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.gameObject.transform.SetParent(transform, true);
-        if (other.attachedRigidbody != null)
+        if (other.attachedRigidbody != null && !other.CompareTag("Player"))
         {
             rbList.Add(other.attachedRigidbody);
             other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Extrapolate;
         }
+        else
+            return;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
