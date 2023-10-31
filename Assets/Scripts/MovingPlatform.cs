@@ -18,7 +18,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void Awake()
     {
-        
+        transform.position = waypoints[0].transform.position;
     }
     void Update()
     {
@@ -50,20 +50,20 @@ public class MovingPlatform : MonoBehaviour
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        collision.gameObject.transform.SetParent(transform, true);
-        if (collision.attachedRigidbody)
+        other.gameObject.transform.SetParent(transform, true);
+        if (other.attachedRigidbody)
         {
-            rbList.Add(collision.attachedRigidbody);
+            rbList.Add(other.attachedRigidbody);
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        collision.gameObject.transform.SetParent(null, true);
-        if (collision.attachedRigidbody)
+        other.gameObject.transform.SetParent(null, true);
+        if (other.attachedRigidbody)
         {
-            rbList.Remove(collision.attachedRigidbody);
+            rbList.Remove(other.attachedRigidbody);
         }
     }
 }

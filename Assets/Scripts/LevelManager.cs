@@ -13,10 +13,12 @@ public class LevelManager : MonoBehaviour
         get { return itemCollected; }
         set { itemCollected = value; }
     }
-    public float RemainingTime { get; set; }
+    public float RemainingTime 
+    { 
+        get { return remainingTime; }
+        set { }
+    }
 
-
-    // Start is called before the first frame update
     private void Awake()
     {
 
@@ -26,8 +28,6 @@ public class LevelManager : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
     private void Update()
     {
 

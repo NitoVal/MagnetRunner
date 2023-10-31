@@ -21,6 +21,7 @@ public class Door : MonoBehaviour, IDoor
 
     Vector2 startPos;
     public Vector2 endPos;
+    
     void Awake()
     {
         startPos = transform.position;
