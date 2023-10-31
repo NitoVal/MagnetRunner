@@ -28,7 +28,7 @@ public class Door : MonoBehaviour, IDoor
         endPos.x = transform.position.x;
         if (doorType is ActivationType.PressurePlate)
         {
-            PressurePlate.onPressingPlate += OpenDoor;
+            PressurePlate.onPressingPlate += OpenDoor; 
             PressurePlate.onReleasingPlate += CloseDoor;
         }
         if (doorType is ActivationType.Button)
@@ -45,9 +45,9 @@ public class Door : MonoBehaviour, IDoor
     private void Update()
     {
         if (isOpen)
-            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * 10f);
+            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * 40f); //Toutes les portes se ferment slowly
         else
-            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * 10f);
+            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * 4f); //Toutes les portes s'ouvrent vite
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
