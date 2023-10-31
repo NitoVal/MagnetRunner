@@ -100,7 +100,7 @@ public class PlayerMagnet : MonoBehaviour
             if (grabbedCollider.IsTouching(holder.GetComponent<Collider2D>()))
             {
                 grabbedRB.transform.position = holder.position;
-                grabbedRB.transform.SetParent(holder.transform);
+                grabbedRB.transform.SetParent(holder.transform, true);
             }
         }
     }

@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = !isFacingRight;
         transform.Rotate(0, 180f, 0);
     }
-    private bool isGrounded() { return Physics2D.OverlapCircle(grCheck.position, grCheckRadius, grMask); } //Check if the GroundCheck hits the ground
+    private bool isGrounded() { return Physics2D.OverlapCircle(grCheck.position, grCheckRadius, grMask); } //Check if the GroundCheck hits the ground layer
     private void Jump()
     {
         if (isGrounded())
