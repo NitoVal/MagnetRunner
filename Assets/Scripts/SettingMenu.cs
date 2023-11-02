@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
-using System.Runtime.CompilerServices;
 
 public class SettingMenu : MonoBehaviour
 {
@@ -16,8 +14,6 @@ public class SettingMenu : MonoBehaviour
 
     // Declaration of an array of resolutions
     private Resolution[] resolution;
-
-
     
     // Start is called once, before any of the Update method is called for the first time
     public void Start()

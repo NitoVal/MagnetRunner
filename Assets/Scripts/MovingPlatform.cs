@@ -20,9 +20,6 @@ public class MovingPlatform : MonoBehaviour
     void Update()
     {
         CheckDistance();
-    }
-    private void FixedUpdate()
-    {
         transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
     }
     private void CheckDistance()
@@ -43,7 +40,7 @@ public class MovingPlatform : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.gameObject.transform.SetParent(transform, true);
-        if (other.attachedRigidbody != null && !other.CompareTag("Player"))
+        if (other.attachedRigidbody != null)
         {
             rbList.Add(other.attachedRigidbody);
             other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Extrapolate;
@@ -59,5 +56,7 @@ public class MovingPlatform : MonoBehaviour
             other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
             rbList.Remove(other.attachedRigidbody);
         }
+        else
+            return;
     }
 }

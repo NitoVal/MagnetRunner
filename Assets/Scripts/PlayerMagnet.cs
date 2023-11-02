@@ -43,14 +43,17 @@ public class PlayerMagnet : MonoBehaviour
             //Check if layer of hit object is different of current gameobject
             if (LayerMask.LayerToName(hit.collider.gameObject.layer) == LayerMask.LayerToName(gameObject.layer))
             {
-                //Push the object away
+                //Push the object
                 hit.collider.attachedRigidbody.AddForce(dir * pushForce, ForceMode2D.Force);
             }
             else
             {
                 //Get the Rigidbody2D of hit object
-                grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
-                grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
+                if (hit.collider.CompareTag("Magnetic"))
+                {
+                    grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+                    grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
+                }
             }
         }
     }
