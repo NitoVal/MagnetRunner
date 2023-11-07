@@ -10,13 +10,10 @@ public class PlayerMovement : MonoBehaviour
 
     float speed = 10f;
     float jumpForce = 20f;
-    bool isFacingRight = true;  
 
+    bool isFacingRight = true;
+    bool IsGrounded;
     Rigidbody2D rb;
-
-    float grCheckRadius = 0.1f;
-    Transform grCheck;
-    LayerMask grMask;
 
     PlayerInput input;
 
@@ -29,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
         //Get components
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
-        grCheck = gameObject.transform.GetChild(0);
-        grMask = LayerMask.GetMask("Ground");
 
         //Initializing input
         InputManager.onMove += OnMovePlayer;
@@ -73,10 +68,9 @@ public class PlayerMovement : MonoBehaviour
         isFacingRight = !isFacingRight;
         transform.Rotate(0, 180f, 0);
     }
-    private bool isGrounded() { return Physics2D.OverlapCircle(grCheck.position, grCheckRadius, grMask); } //Check if the GroundCheck hits the ground layer
     private void Jump()
     {
-        if (isGrounded())
+        if (IsGrounded)
             rb.velocity = Vector2.up * jumpForce;
         //play animation
     }
@@ -90,9 +84,14 @@ public class PlayerMovement : MonoBehaviour
         //play animation
         transform.localScale += new Vector3(0,.5f,0);
     } //TO REDO
-    private void OnDrawGizmos()
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if(!grCheck) grCheck = gameObject.transform.GetChild(0);
-        Gizmos.DrawSphere(grCheck.position, grCheckRadius);
+        if (other.gameObject.CompareTag("Jumpable"))
+            IsGrounded = true;
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Jumpable"))
+            IsGrounded = false;
     }
 }

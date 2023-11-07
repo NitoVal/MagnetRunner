@@ -13,6 +13,9 @@ public class PlayerMagnet : MonoBehaviour
 
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;
+
+    string old_tag;
+
     void Awake()
     {
         //Get Input component
@@ -48,12 +51,10 @@ public class PlayerMagnet : MonoBehaviour
             }
             else
             {
-                //Get the Rigidbody2D of hit object
-                if (hit.collider.CompareTag("Magnetic"))
-                {
-                    grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
-                    grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
-                }
+                grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+                grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
+                old_tag = grabbedRB.tag;
+                grabbedRB.tag = "Untagged";
             }
         }
     }
@@ -66,6 +67,8 @@ public class PlayerMagnet : MonoBehaviour
             grabbedRB.isKinematic = false;
             grabbedRB.interpolation = RigidbodyInterpolation2D.None;
             grabbedRB.AddForce(holder.up * throwForce, ForceMode2D.Impulse);
+            grabbedRB.tag = old_tag;
+            old_tag = "";
             grabbedRB = null;
         }
     }

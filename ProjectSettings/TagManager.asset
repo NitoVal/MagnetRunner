@@ -5,12 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
-  - Magnetic
+  - Jumpable
+  - GroundCheck
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - GroundCheck
   - Water
   - UI
   - N

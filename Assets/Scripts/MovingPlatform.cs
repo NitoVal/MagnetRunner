@@ -8,8 +8,11 @@ public class MovingPlatform : MonoBehaviour
     public GameObject[] waypoints;
     private int currentWaypointIndex = 0;
 
+    [Range(5f, 15f)]
     public float speed;
-    public float intervalBetweenPoint; //in seconds
+
+    [Range(0, 3f)]
+    public float intervalBetweenPoint;
 
     float temp;
     public List<Rigidbody2D> rbList;
@@ -39,17 +42,21 @@ public class MovingPlatform : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("GroundCheck"))
+            return;
+
         other.gameObject.transform.SetParent(transform, true);
         if (other.attachedRigidbody != null)
         {
             rbList.Add(other.attachedRigidbody);
             other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Extrapolate;
         }
-        else
-            return;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("GroundCheck"))
+            return;
+
         other.gameObject.transform.SetParent(null);
         if (other.attachedRigidbody != null)
         {
