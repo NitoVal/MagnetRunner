@@ -13,6 +13,9 @@ public class PlayerMagnet : MonoBehaviour
 
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;
+
+    string old_tag;
+
     void Awake()
     {
         //Get Input component
@@ -43,14 +46,15 @@ public class PlayerMagnet : MonoBehaviour
             //Check if layer of hit object is different of current gameobject
             if (LayerMask.LayerToName(hit.collider.gameObject.layer) == LayerMask.LayerToName(gameObject.layer))
             {
-                //Push the object away
+                //Push the object
                 hit.collider.attachedRigidbody.AddForce(dir * pushForce, ForceMode2D.Force);
             }
             else
             {
-                //Get the Rigidbody2D of hit object
                 grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
                 grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
+                old_tag = grabbedRB.tag;
+                grabbedRB.tag = "Untagged";
             }
         }
     }
@@ -63,6 +67,8 @@ public class PlayerMagnet : MonoBehaviour
             grabbedRB.isKinematic = false;
             grabbedRB.interpolation = RigidbodyInterpolation2D.None;
             grabbedRB.AddForce(holder.up * throwForce, ForceMode2D.Impulse);
+            grabbedRB.tag = old_tag;
+            old_tag = "";
             grabbedRB = null;
         }
     }
@@ -100,7 +106,7 @@ public class PlayerMagnet : MonoBehaviour
             if (grabbedCollider.IsTouching(holder.GetComponent<Collider2D>()))
             {
                 grabbedRB.transform.position = holder.position;
-                grabbedRB.transform.SetParent(holder.transform);
+                grabbedRB.transform.SetParent(holder.transform, true);
             }
         }
     }

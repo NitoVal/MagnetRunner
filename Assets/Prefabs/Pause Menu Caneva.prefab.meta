@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Pause Menu Caneva.prefab.meta
 guid: db9445517bcb7ce409ae5d221d53aad4
+========
+guid: e9977399bfcd3bd4b956d87e24133f21
+>>>>>>>> Amelia-branch:Assets/Scenes/Door.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
