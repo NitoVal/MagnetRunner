@@ -17,10 +17,20 @@ public class ItemBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collision");
-            levelManager.ItemCollected++;
-            collectibleNumber.text = levelManager.ItemCollected.ToString();
-            Destroy(gameObject);
+            if (this.name != "Goal")
+            {
+                Debug.Log("Collected");
+                levelManager.ItemCollected++;
+                collectibleNumber.text = levelManager.ItemCollected.ToString();
+                levelManager.RemainingTime += 5f;
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("Goal obtained");
+                levelManager.GoalItemCollected++;
+                Destroy(gameObject);
+            }
         }
     }
 }

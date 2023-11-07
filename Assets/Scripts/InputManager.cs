@@ -40,6 +40,25 @@ public class InputManager : MonoBehaviour
 
         actions.Player.Pause.performed += OnPause;
     }
+    void OnDisable()
+    {
+        actions.Player.Movement.performed -= OnMovePressed;
+        actions.Player.Movement.canceled -= OnMovePressed;
+
+        actions.Player.Jump.performed -= OnJumpPressed;
+
+        actions.Player.Crouch.performed -= OnCrouchPressed;
+        actions.Player.Crouch.canceled -= OnCrouchCanceled;
+
+        actions.Player.SwitchPolarity.performed -= OnSwitchPolarity;
+
+        actions.Player.Activatemagnet.performed -= OnActivateMagnet;
+        actions.Player.Activatemagnet.canceled -= OnStopMagnet;
+
+        actions.Player.Interact.performed -= OnInteract;
+
+        actions.Player.Pause.performed -= OnPause;
+    }
     private void OnPause(InputAction.CallbackContext obj)
     {
         onPause?.Invoke();
