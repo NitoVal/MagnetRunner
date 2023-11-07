@@ -45,7 +45,7 @@ public class Door : MonoBehaviour, IDoor
     private void Update()
     {
         if (isOpen)
-            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * 40f); //Toutes les portes se ferment slowly
+            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * 50f); //Toutes les portes se ferment slowly
         else
             transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * 4f); //Toutes les portes s'ouvrent vite
     }
