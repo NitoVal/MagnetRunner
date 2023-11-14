@@ -29,9 +29,9 @@ public class PlayerMagnet : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("N");
 
         //set color of player based on polarity
-        gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
     }
-    private void OnDisable()
+    private void OnDisable() 
     {
         InputManager.onSwitchPolarity -= SwitchPolarity;
         InputManager.onMagnetOn -= Activatemagnet;
@@ -77,12 +77,12 @@ public class PlayerMagnet : MonoBehaviour
         if (LayerMask.LayerToName(gameObject.layer) != "S")
         {
             gameObject.layer = LayerMask.NameToLayer("S");
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
         else
         {
             gameObject.layer = LayerMask.NameToLayer("N");
-            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
         }
     }
     private void FixedUpdate()
@@ -97,13 +97,7 @@ public class PlayerMagnet : MonoBehaviour
                 grabbedRB.interpolation = RigidbodyInterpolation2D.Interpolate;
                 grabbedRB.MovePosition(Vector2.Lerp(grabbedRB.position, holder.position,Time.deltaTime * lerpSpeed));
             }
-        }
-    }
-    private void LateUpdate()
-    {
-        if (grabbedRB)
-        {
-            if (grabbedCollider.IsTouching(holder.GetComponent<Collider2D>()))
+            else
             {
                 grabbedRB.transform.position = holder.position;
                 grabbedRB.transform.SetParent(holder.transform, true);
