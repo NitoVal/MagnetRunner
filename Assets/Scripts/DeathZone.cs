@@ -8,8 +8,6 @@ public class DeathZone : MonoBehaviour
     //Attribute
     [Header("Needed Components")]
     [SerializeField] LevelManager levelManager;
-
-
     // Methods
     public void OnTriggerExit2D(Collider2D collision)
     {

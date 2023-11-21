@@ -15,10 +15,11 @@ public class MovingPlatform : MonoBehaviour
     public float intervalBetweenPoint;
 
     float temp;
-    public List<Rigidbody2D> rbList;
+    List<Rigidbody2D> rbList;
     private void Awake()
     {
         transform.position = waypoints[0].transform.position;
+        rbList = new List<Rigidbody2D>();
     }
     void Update()
     {
@@ -44,26 +45,30 @@ public class MovingPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("GroundCheck"))
             return;
-
         other.gameObject.transform.SetParent(transform, true);
         if (other.attachedRigidbody != null)
         {
             rbList.Add(other.attachedRigidbody);
             other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Extrapolate;
         }
+        else
+            return;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("GroundCheck"))
             return;
-
         other.gameObject.transform.SetParent(null);
         if (other.attachedRigidbody != null)
         {
-            other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
-            rbList.Remove(other.attachedRigidbody);
+           other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
+           rbList.Remove(other.attachedRigidbody);
         }
         else
-            return;
+           return;
+    }
+    private void OnApplicationQuit()
+    {
+        transform.DetachChildren();
     }
 }

@@ -769,9 +769,9 @@ RectTransform:
   - {fileID: 4277825518975938824}
   m_Father: {fileID: 1441403645098349535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.33325, y: -315.67447}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.4463, y: 70.1557}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7987094573085682207
@@ -1650,9 +1650,9 @@ RectTransform:
   - {fileID: 3675769488825927268}
   m_Father: {fileID: 1441403645098349535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.33325, y: -221.79538}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 216.47, y: 70.1558}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6772493456534159716
@@ -3303,9 +3303,9 @@ RectTransform:
   - {fileID: 3093648576890571805}
   m_Father: {fileID: 1441403645098349535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.33325, y: -43.515926}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 216.4705, y: 64.3085}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6524217602442669668
@@ -4080,9 +4080,9 @@ RectTransform:
   - {fileID: 8290122705406567893}
   m_Father: {fileID: 1441403645098349535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.33325, y: -131.19382}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 216.47, y: 63.6006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1302970166518695524
@@ -4864,7 +4864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4733988127806284260
 RectTransform:
   m_ObjectHideFlags: 0

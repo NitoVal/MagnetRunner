@@ -17,9 +17,10 @@ public class ItemBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (this.name != "Goal")
+            if (this.name != "TrophéeRécompense")
             {
                 Debug.Log("Collected");
+                AudioManager.Singleton.PlaySound("Collectible");
                 levelManager.ItemCollected++;
                 collectibleNumber.text = levelManager.ItemCollected.ToString();
                 levelManager.RemainingTime += 5f;

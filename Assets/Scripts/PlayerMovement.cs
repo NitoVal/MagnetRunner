@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 mousePos;
     [SerializeField] Transform point;
+    [SerializeField] Transform playerTransform;
 
     //Called when instance is loaded in the scene
     private void Awake()
@@ -54,9 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Move the player horizontally
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
-    }
-    private void LateUpdate()
-    {
+
         //Rotate holder object
         Vector2 dir = mousePos - (Vector2)point.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
@@ -66,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     private void Flip()
     {
         isFacingRight = !isFacingRight;
-        transform.Rotate(0, 180f, 0);
+        playerTransform.Rotate(0, 180f, 0);
     }
     private void Jump()
     {
