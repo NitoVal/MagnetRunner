@@ -3,19 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.ParticleSystem;
 
 public class PlayerMagnet : MonoBehaviour
 {
     PlayerInput input;
 
     [SerializeField] Transform holder;
-    float range = 5f, lerpSpeed = 10f, throwForce = 30f, pushForce = 200f;
+    float range = 5f, lerpSpeed = 10f, throwForce = 25f, pushForce = 200f;
 
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;
 
-    public static event Action onSwitchedPolarity;
     string old_tag;
+    [SerializeField] private ParticleSystem Particule;
+
 
     void Awake()
     {
@@ -30,9 +32,9 @@ public class PlayerMagnet : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("N");
 
         //set color of player based on polarity
-        gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
     }
-    private void OnDisable() 
+    private void OnDisable()
     {
         InputManager.onSwitchPolarity -= SwitchPolarity;
         InputManager.onMagnetOn -= Activatemagnet;
@@ -52,8 +54,6 @@ public class PlayerMagnet : MonoBehaviour
             }
             else
             {
-                if (LayerMask.LayerToName(hit.collider.gameObject.layer) != "N" && LayerMask.LayerToName(hit.collider.gameObject.layer) != "S")
-                    return;
                 grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
                 grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
                 old_tag = grabbedRB.tag;
@@ -80,12 +80,15 @@ public class PlayerMagnet : MonoBehaviour
         if (LayerMask.LayerToName(gameObject.layer) != "S")
         {
             gameObject.layer = LayerMask.NameToLayer("S");
-            gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            ParticleSystem particuleGO = Instantiate(Particule);
+            particuleGO.transform.position = this.transform.position;
+
         }
         else
         {
             gameObject.layer = LayerMask.NameToLayer("N");
-            gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
         }
     }
     private void FixedUpdate()
@@ -100,7 +103,13 @@ public class PlayerMagnet : MonoBehaviour
                 grabbedRB.interpolation = RigidbodyInterpolation2D.Interpolate;
                 grabbedRB.MovePosition(Vector2.Lerp(grabbedRB.position, holder.position,Time.deltaTime * lerpSpeed));
             }
-            else
+        }
+    }
+    private void LateUpdate()
+    {
+        if (grabbedRB)
+        {
+            if (grabbedCollider.IsTouching(holder.GetComponent<Collider2D>()))
             {
                 grabbedRB.transform.position = holder.position;
                 grabbedRB.transform.SetParent(holder.transform, true);
