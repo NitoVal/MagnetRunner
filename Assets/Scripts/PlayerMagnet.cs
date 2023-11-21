@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.ParticleSystem;
 
 public class PlayerMagnet : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerMagnet : MonoBehaviour
     Collider2D grabbedCollider;
 
     string old_tag;
+    [SerializeField] private ParticleSystem Particule;
+
 
     void Awake()
     {
@@ -78,6 +81,9 @@ public class PlayerMagnet : MonoBehaviour
         {
             gameObject.layer = LayerMask.NameToLayer("S");
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            ParticleSystem particuleGO = Instantiate(Particule);
+            particuleGO.transform.position = this.transform.position;
+
         }
         else
         {
