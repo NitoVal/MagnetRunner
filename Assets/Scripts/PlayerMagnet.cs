@@ -9,11 +9,12 @@ public class PlayerMagnet : MonoBehaviour
     PlayerInput input;
 
     [SerializeField] Transform holder;
-    float range = 5f, lerpSpeed = 10f, throwForce = 25f, pushForce = 200f;
+    float range = 5f, lerpSpeed = 10f, throwForce = 30f, pushForce = 200f;
 
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;
 
+    public static event Action onSwitchedPolarity;
     string old_tag;
 
     void Awake()
@@ -51,6 +52,8 @@ public class PlayerMagnet : MonoBehaviour
             }
             else
             {
+                if (LayerMask.LayerToName(hit.collider.gameObject.layer) != "N" && LayerMask.LayerToName(hit.collider.gameObject.layer) != "S")
+                    return;
                 grabbedRB = hit.collider.gameObject.GetComponent<Rigidbody2D>();
                 grabbedCollider = grabbedRB.gameObject.GetComponent<Collider2D>();
                 old_tag = grabbedRB.tag;

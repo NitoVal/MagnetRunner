@@ -72,7 +72,7 @@ public class SettingMenu : MonoBehaviour
     }
 
     // Toggle full screen 
-    public void SetFullScren(bool isFullScren)
+    public void SetFullScreen(bool isFullScren)
     {
         Screen.fullScreen = isFullScren;
     }

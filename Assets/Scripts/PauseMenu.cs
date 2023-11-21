@@ -13,20 +13,18 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         isPaused = false;
-        Time.timeScale = 1.0f;
         InputManager.onPause += PauseGame;
+
     }
     private void OnDisable()
     {
         InputManager.onPause -= PauseGame;
     }
-
-    public void PauseGame()
+    private void Update()
     {
-        if (!isPaused)
+        if (isPaused)
         {
             Time.timeScale = 0f;
-            isPaused = true;
             pauseMenuCanvas.SetActive(isPaused);
             pauseCanvas.SetActive(isPaused);
             optionMenuCanvas.SetActive(!isPaused);
@@ -34,14 +32,24 @@ public class PauseMenu : MonoBehaviour
         else
         {
             Time.timeScale = 1f;
-            isPaused = false;
             pauseMenuCanvas.SetActive(isPaused);
             pauseCanvas.SetActive(isPaused);
             optionMenuCanvas.SetActive(!isPaused);
         }
     }
+    public void PauseGame()
+    {
+        if (isPaused)
+            isPaused = false;
+        else
+            isPaused = true;
+    }
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
