@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 
 public class TropheeRecompense : MonoBehaviour
-{
-
+{ 
     [SerializeField] TMP_Text WellDoneText;
 
     private void OnTriggerEnter2D(Collider2D other)

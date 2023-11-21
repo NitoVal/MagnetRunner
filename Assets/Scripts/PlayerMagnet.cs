@@ -38,11 +38,11 @@ public class PlayerMagnet : MonoBehaviour
         InputManager.onMagnetOff -= StopMagnet;
     }
     private void Activatemagnet()
-    {
+    { 
         Vector2 dir = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - holder.position;
         RaycastHit2D hit = Physics2D.Raycast(holder.position, dir, range);
         if (hit.collider != null && hit.collider.attachedRigidbody)
-        {
+        { 
             //Check if layer of hit object is different of current gameobject
             if (LayerMask.LayerToName(hit.collider.gameObject.layer) == LayerMask.LayerToName(gameObject.layer))
             {
@@ -97,7 +97,7 @@ public class PlayerMagnet : MonoBehaviour
                 grabbedRB.interpolation = RigidbodyInterpolation2D.Interpolate;
                 grabbedRB.MovePosition(Vector2.Lerp(grabbedRB.position, holder.position,Time.deltaTime * lerpSpeed));
             }
-        }
+        } 
     }
     private void LateUpdate()
     {
@@ -108,7 +108,7 @@ public class PlayerMagnet : MonoBehaviour
                 grabbedRB.transform.position = holder.position;
                 grabbedRB.transform.SetParent(holder.transform, true);
             }
-        }
+        } 
     }
     private void OnDrawGizmos()
     {

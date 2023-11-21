@@ -7,6 +7,9 @@ TagManager:
   - Door
   - Jumpable
   - GroundCheck
+  - RecompenseFin
+  - MagneticPlatformConstant2
+  - Box
   layers:
   - Default
   - TransparentFX

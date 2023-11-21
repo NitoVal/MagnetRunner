@@ -8,7 +8,7 @@ public class MovingPlatform : MonoBehaviour
     public GameObject[] waypoints;
     private int currentWaypointIndex = 0;
 
-    [Range(5f, 15f)]
+    [Range(25f, 65f)]
     public float speed;
 
     [Range(0, 3f)]

@@ -77,12 +77,14 @@ public class PlayerMovement : MonoBehaviour
     private void Crouch()
     {
         //play animation
-        transform.localScale -= new Vector3(0, 0.5f, 0);
+        transform.localScale -= new Vector3(0,5, 0);
+        this.transform.position -= new Vector3(0,0.6f,0);
     } //TO REDO
     private void CancelCrouch()
     {
         //play animation
-        transform.localScale += new Vector3(0,.5f,0);
+        transform.localScale += new Vector3(0,5f,0);
+        this.transform.position += new Vector3(0,0.5f, 0);
     } //TO REDO
     private void OnTriggerStay2D(Collider2D other)
     {
