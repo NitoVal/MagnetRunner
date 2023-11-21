@@ -7742,6 +7742,7 @@ MonoBehaviour:
   id: 0
   isOpen: 0
   endPos: {x: 0, y: 5}
+  speed: 4
 --- !u!61 &1117666431
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9206,7 +9207,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 25
+    angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -14002,6 +14003,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ab5a94f9dd4e088488acd2cbe88ef6a9, type: 2}
+  - {fileID: 2100000, guid: ab5a94f9dd4e088488acd2cbe88ef6a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17953,13 +17955,13 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -18009,7 +18011,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    minVertexDistance: 0.2
+    minVertexDistance: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
     ribbonCount: 1
@@ -18026,7 +18028,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0, g: 0.06738949, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19227,6 +19229,7 @@ MonoBehaviour:
   id: 1
   isOpen: 0
   endPos: {x: 45, y: 5}
+  speed: 4
 --- !u!61 &1987530095
 BoxCollider2D:
   m_ObjectHideFlags: 0
