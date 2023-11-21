@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Cinemachine;
+
+public class CameraEffects : MonoBehaviour
+{
+    public static CameraEffects Singleton;
+
+    private float duration, intensity;
+    private bool isShaking = false;
+    private Vector3 positionInitial;
+    private float timer = 0;
+    public static CinemachineVirtualCamera vc;
+    private void Awake()
+    {
+        if (Singleton == null)
+        {
+            Singleton = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+        vc = GetComponent<CinemachineVirtualCamera>();
+    }
+
+    private void Update()
+    {
+        
+
+        if (!isShaking) return;
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            isShaking = false;
+            timer = 0;
+            CinemachineBasicMultiChannelPerlin mcp = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            mcp.m_AmplitudeGain = 0f;
+        }
+
+        this.transform.position = positionInitial + (Random.insideUnitSphere * intensity);
+    }
+
+    
+
+   
+
+    public void ShakeCamera(float duration, float intensity)
+    {
+        CinemachineBasicMultiChannelPerlin mcp = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        mcp.m_AmplitudeGain = intensity;
+
+        timer = duration;
+        isShaking = true;
+    }
+
+}
