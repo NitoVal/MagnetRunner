@@ -14,7 +14,7 @@ public class PlayerMagnet : MonoBehaviour
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;
 
-    public static event Action onSwitchedPolarity;
+    public static event Action<string> onSwitchedPolarity;
     string old_tag;
 
     void Awake()
@@ -28,6 +28,7 @@ public class PlayerMagnet : MonoBehaviour
 
         //Set layer of current gameObject
         gameObject.layer = LayerMask.NameToLayer("N");
+        onSwitchedPolarity?.Invoke(LayerMask.LayerToName(gameObject.layer));
 
         //set color of player based on polarity
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
@@ -87,6 +88,7 @@ public class PlayerMagnet : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("N");
             gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
         }
+        onSwitchedPolarity?.Invoke(LayerMask.LayerToName(gameObject.layer));
     }
     private void FixedUpdate()
     {

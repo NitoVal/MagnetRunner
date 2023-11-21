@@ -5,14 +5,24 @@ using UnityEngine;
 
 public class ParticleEffectSwitch : MonoBehaviour
 {
-    
+    public ParticleSystem plusVFX;
+    public ParticleSystem minusVFX;
     void Awake()
     {
         PlayerMagnet.onSwitchedPolarity += ChangeParticleEffect;
     }
 
-    private void ChangeParticleEffect()
+    private void ChangeParticleEffect(string layer)
     {
-        throw new NotImplementedException();
+        if (layer == "N")
+        {
+            plusVFX.Play();
+            minusVFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+        if (layer == "S")
+        {
+            minusVFX.Play();
+            plusVFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
     }
 }

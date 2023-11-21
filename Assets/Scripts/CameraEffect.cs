@@ -7,7 +7,7 @@ public class CameraEffects : MonoBehaviour
 {
     public static CameraEffects Singleton;
 
-    private float duration, intensity;
+    private float intensity;
     private bool isShaking = false;
     private Vector3 positionInitial;
     private float timer = 0;
@@ -15,21 +15,15 @@ public class CameraEffects : MonoBehaviour
     private void Awake()
     {
         if (Singleton == null)
-        {
             Singleton = this;
-        }
         else
-        {
             Destroy(this);
-        }
 
         vc = GetComponent<CinemachineVirtualCamera>();
     }
 
     private void Update()
     {
-        
-
         if (!isShaking) return;
 
         timer -= Time.deltaTime;
@@ -44,11 +38,6 @@ public class CameraEffects : MonoBehaviour
 
         this.transform.position = positionInitial + (Random.insideUnitSphere * intensity);
     }
-
-    
-
-   
-
     public void ShakeCamera(float duration, float intensity)
     {
         CinemachineBasicMultiChannelPerlin mcp = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
