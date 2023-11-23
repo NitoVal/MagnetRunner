@@ -9,13 +9,17 @@ public class PlayerMagnet : MonoBehaviour
     PlayerInput input;
 
     [SerializeField] Transform holder;
-    float range = 5f, lerpSpeed = 10f, throwForce = 30f, pushForce = 200f;
+    float range = 5f, lerpSpeed = 10f, throwForce = 30f, pushForce = 200f, cooldown = 1f;
+
+    public ParticleSystem SwitchN;
+    public ParticleSystem SwitchS;
 
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;
 
     public static event Action<string> onSwitchedPolarity;
     string old_tag;
+    bool coolingDown;
 
     void Awake()
     {
@@ -78,17 +82,24 @@ public class PlayerMagnet : MonoBehaviour
     }
     private void SwitchPolarity()
     {
-        if (LayerMask.LayerToName(gameObject.layer) != "S")
+        if (!coolingDown)
         {
-            gameObject.layer = LayerMask.NameToLayer("S");
-            gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            if (LayerMask.LayerToName(gameObject.layer) != "S")
+            {
+                gameObject.layer = LayerMask.NameToLayer("S");
+                gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+                SwitchS.Play();
+            }
+            else
+            {
+                gameObject.layer = LayerMask.NameToLayer("N");
+                gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+                SwitchN.Play();
+            }
+            cooldown = 1f;
+            onSwitchedPolarity?.Invoke(LayerMask.LayerToName(gameObject.layer));
         }
-        else
-        {
-            gameObject.layer = LayerMask.NameToLayer("N");
-            gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
-        }
-        onSwitchedPolarity?.Invoke(LayerMask.LayerToName(gameObject.layer));
+
     }
     private void FixedUpdate()
     {
@@ -108,6 +119,17 @@ public class PlayerMagnet : MonoBehaviour
                 grabbedRB.transform.SetParent(holder.transform, true);
             }
         }
+    }
+    private void Update()
+    {
+        if (cooldown <= 0)
+            coolingDown = false;
+        else
+        {
+            coolingDown = true;
+            cooldown -= Time.deltaTime;
+        }
+            
     }
     private void OnDrawGizmos()
     {

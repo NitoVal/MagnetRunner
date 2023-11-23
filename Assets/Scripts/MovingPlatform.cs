@@ -18,13 +18,18 @@ public class MovingPlatform : MonoBehaviour
     List<Rigidbody2D> rbList;
     private void Awake()
     {
-        transform.position = waypoints[0].transform.position;
+        if (waypoints.Length != 0)
+            transform.position = waypoints[0].transform.position;
+
         rbList = new List<Rigidbody2D>();
     }
     void Update()
     {
-        CheckDistance();
-        transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+        if (waypoints.Length != 0)
+        {
+            CheckDistance();
+            transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+        }
     }
     private void CheckDistance()
     {
