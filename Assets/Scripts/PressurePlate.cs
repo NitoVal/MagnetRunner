@@ -12,7 +12,9 @@ public class PressurePlate : MonoBehaviour
     //public Animator animator;
     private void OnTriggerEnter2D(Collider2D other)
     {
+        AudioManager.Singleton.PlaySound("OpenDoor");
         onPressingPlate?.Invoke(id);
+        CameraEffects.Singleton.ShakeCamera(1f, 10f);
         //animator.SetBool("isPressed", true);
     }
     private void OnTriggerExit2D(Collider2D other)
