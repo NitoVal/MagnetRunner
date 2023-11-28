@@ -8,8 +8,8 @@ public class ItemBehavior : MonoBehaviour
 {
     //Attribute
     [Header("Needed Components")]
-    [SerializeField] TMP_Text collectibleNumber;
-    [SerializeField] LevelManager levelManager;
+    public TMP_Text collectibleNumber;
+    public LevelManager levelManager;
 
 
     //Methods
