@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1370193506722803164}
+  - component: {fileID: 1437162653449686516}
   m_Layer: 2
   m_Name: GArea
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   - {fileID: 826304994767351334}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1437162653449686516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894815399873436543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06878727bb0eba43b782987b9267b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plusVFX: {fileID: 264546217092162248}
+  minusVFX: {fileID: 1636372049022779137}
 --- !u!1 &2979794851606317693
 GameObject:
   m_ObjectHideFlags: 0

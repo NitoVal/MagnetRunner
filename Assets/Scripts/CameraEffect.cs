@@ -12,6 +12,7 @@ public class CameraEffects : MonoBehaviour
     private Vector3 positionInitial;
     private float timer = 0;
     public static CinemachineVirtualCamera vc;
+    CinemachineBasicMultiChannelPerlin mcp;
     private void Awake()
     {
         if (Singleton == null)
@@ -20,6 +21,11 @@ public class CameraEffects : MonoBehaviour
             Destroy(this);
 
         vc = GetComponent<CinemachineVirtualCamera>();
+        if (vc != null)
+        {
+            mcp = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            mcp.m_AmplitudeGain = 0f;
+        }
     }
 
     private void Update()
@@ -32,7 +38,6 @@ public class CameraEffects : MonoBehaviour
         {
             isShaking = false;
             timer = 0;
-            CinemachineBasicMultiChannelPerlin mcp = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             mcp.m_AmplitudeGain = 0f;
         }
 
@@ -40,8 +45,6 @@ public class CameraEffects : MonoBehaviour
     }
     public void ShakeCamera(float duration, float intensity)
     {
-        CinemachineBasicMultiChannelPerlin mcp = vc.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
         mcp.m_AmplitudeGain = intensity;
 
         timer = duration;

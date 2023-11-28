@@ -16,7 +16,7 @@ public class MovingPlatform : MonoBehaviour
 
     float temp;
     List<Rigidbody2D> rbList;
-    private void Awake()
+    void Awake()
     {
         if (waypoints.Length != 0)
             transform.position = waypoints[0].transform.position;
