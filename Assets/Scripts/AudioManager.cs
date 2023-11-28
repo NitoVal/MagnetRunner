@@ -17,11 +17,11 @@ public class AudioManager : MonoBehaviour
             Singleton = this;
 
             // Permet au game object de rester d'une scene a l'autre (persistant)
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
     #endregion
@@ -42,8 +42,6 @@ public class AudioManager : MonoBehaviour
                 PlaySounds(sound.audioClip);
             }
         }
-
-
     }
 
     public void PlaySounds(AudioClip soundClip)

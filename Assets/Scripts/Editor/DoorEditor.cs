@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CustomEditor(typeof(Door))]
@@ -29,6 +30,11 @@ public class DoorEditor : Editor
                 break;
             default:
                 break;
+        }
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(door);
+            EditorSceneManager.MarkSceneDirty(door.gameObject.scene);
         }
     }
 }

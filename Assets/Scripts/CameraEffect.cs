@@ -36,7 +36,7 @@ public class CameraEffects : MonoBehaviour
             mcp.m_AmplitudeGain = 0f;
         }
 
-        this.transform.position = positionInitial + (Random.insideUnitSphere * intensity);
+        transform.position = positionInitial + (Random.insideUnitSphere * intensity);
     }
     public void ShakeCamera(float duration, float intensity)
     {
