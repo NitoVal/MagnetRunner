@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorType: 0
   keyType: 0
-  triggerArea: {fileID: 5342858284469452697}
   id: 0
   isOpen: 0
   endPos: {x: 35, y: 5}
+  speed: 0

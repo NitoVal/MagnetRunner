@@ -11,8 +11,7 @@ public class PlayerMagnet : MonoBehaviour
     [SerializeField] Transform holder;
     float range = 5f, lerpSpeed = 10f, throwForce = 30f, pushForce = 200f, cooldown = 1f;
 
-    public ParticleSystem SwitchN;
-    public ParticleSystem SwitchS;
+    public ParticleSystem SwitchN, SwitchS;
 
     Rigidbody2D grabbedRB;
     Collider2D grabbedCollider;

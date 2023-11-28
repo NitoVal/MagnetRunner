@@ -14,7 +14,6 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = false;
         InputManager.onPause += PauseGame;
-
     }
     private void OnDisable()
     {
@@ -44,12 +43,6 @@ public class PauseMenu : MonoBehaviour
         else
             isPaused = true;
     }
-    public void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
+    public void RestartLevel() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+    public void MainMenu(){ SceneManager.LoadScene(0); }
 }

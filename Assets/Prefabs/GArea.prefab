@@ -31,8 +31,6 @@ Transform:
   m_Children:
   - {fileID: 5774970909123340836}
   - {fileID: 826304994767351334}
-  - {fileID: 7868252134781161610}
-  - {fileID: 1099339526077906577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2979794851606317693
@@ -61,12 +59,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2979794851606317693}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1370193506722803164}
+  m_Father: {fileID: 5774970909123340836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &264546217092162248
 ParticleSystem:
@@ -4894,7 +4892,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1099339526077906577}
   m_Father: {fileID: 1370193506722803164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6580972844258747815
@@ -5045,7 +5044,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7868252134781161610}
   m_Father: {fileID: 1370193506722803164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5983890583979833682
@@ -5191,12 +5191,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8900231632619019366}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1370193506722803164}
+  m_Father: {fileID: 826304994767351334}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &1636372049022779137
 ParticleSystem:

@@ -10,8 +10,6 @@ public class ItemBehavior : MonoBehaviour
     [Header("Needed Components")]
     [SerializeField] TMP_Text collectibleNumber;
     [SerializeField] LevelManager levelManager;
-
-
     //Methods
     public void OnTriggerEnter2D(Collider2D collision)
     {
