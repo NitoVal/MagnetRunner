@@ -8,14 +8,16 @@ public class ItemBehavior : MonoBehaviour
 {
     //Attribute
     [Header("Needed Components")]
-    [SerializeField] TMP_Text collectibleNumber;
-    [SerializeField] LevelManager levelManager;
+    public TMP_Text collectibleNumber;
+    public LevelManager levelManager;
+
+
     //Methods
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (name != "TrophéeRécompense")
+            if (this.name != "TrophéeRécompense")
             {
                 Debug.Log("Collected");
                 AudioManager.Singleton.PlaySound("Collectible");
