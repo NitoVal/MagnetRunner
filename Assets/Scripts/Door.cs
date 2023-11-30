@@ -46,9 +46,9 @@ public class Door : MonoBehaviour, IDoor
     private void Update()
     {
         if (isOpen)
-            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * speed);
+            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * speed); 
         else
-            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * speed/10); 
+            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * speed/15);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

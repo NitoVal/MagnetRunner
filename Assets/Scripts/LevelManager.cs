@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     // Attributes
     private byte itemCollected = 0;
     private byte goalItemCollected = 0;
-    private float remainingTime = 30f;
+    private float remainingTime = 50f;
     private bool timerEnable = false;
     public UnityEvent onWin;
     public UnityEvent onLose;
