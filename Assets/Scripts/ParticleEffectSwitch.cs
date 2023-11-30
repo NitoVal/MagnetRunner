@@ -11,7 +11,10 @@ public class ParticleEffectSwitch : MonoBehaviour
     {
         PlayerMagnet.onSwitchedPolarity += ChangeParticleEffect;
     }
-
+    private void OnDisable()
+    {
+        PlayerMagnet.onSwitchedPolarity -= ChangeParticleEffect;
+    }
     private void ChangeParticleEffect(string layer)
     {
         if (layer == "N")
