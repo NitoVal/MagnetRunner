@@ -17,6 +17,14 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
+
+    public void HideTutorial()
+    {
+        foreach (TutorialPopUp tutorial in popUps)
+        {
+            tutorial.popUp.SetActive(false);
+        }
+    }
 }
 
 [System.Serializable]
