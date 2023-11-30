@@ -17,7 +17,7 @@ public class ItemBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (gameObject.name != "TrophéeRécompense")
+            if (!gameObject.CompareTag("RecompenseFin"))
             {
                 AudioManager.Singleton.PlaySound("Collectible");
                 levelManager.ItemCollected++;

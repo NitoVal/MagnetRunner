@@ -19,29 +19,25 @@ public class PauseMenu : MonoBehaviour
     {
         InputManager.onPause -= PauseGame;
     }
-    private void Update()
+    public void PauseGame()
     {
         if (isPaused)
         {
-            Time.timeScale = 0f;
-            pauseMenuCanvas.SetActive(isPaused);
-            pauseCanvas.SetActive(isPaused);
-            optionMenuCanvas.SetActive(!isPaused);
-        }
-        else
-        {
+            isPaused = false;
             Time.timeScale = 1f;
             pauseMenuCanvas.SetActive(isPaused);
             pauseCanvas.SetActive(isPaused);
             optionMenuCanvas.SetActive(!isPaused);
         }
-    }
-    public void PauseGame()
-    {
-        if (isPaused)
-            isPaused = false;
         else
+        {
             isPaused = true;
+            Time.timeScale = 0f;
+            pauseMenuCanvas.SetActive(isPaused);
+            pauseCanvas.SetActive(isPaused);
+            optionMenuCanvas.SetActive(!isPaused);
+        }
+
     }
     public void RestartLevel() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
     public void MainMenu(){ SceneManager.LoadScene(0); }

@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     // Attributes
     private byte itemCollected = 0;
     private byte goalItemCollected = 0;
-    private float remainingTime = 50f;
+    [SerializeField] private float remainingTime = 50f;
     private bool timerEnable = false;
     public UnityEvent onWin;
     public UnityEvent onLose;
@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
     public void WinGame()
     {
         Time.timeScale = 0f;
-        Debug.Log("Win");
+        timerEnable = false;
     }
 
     public void LoseGame()
@@ -94,6 +94,5 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0f;
         timerEnable = false;
         remainingTime = 0;
-        Debug.Log("Lose");
     }
 }

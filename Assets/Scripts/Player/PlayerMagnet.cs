@@ -29,12 +29,7 @@ public class PlayerMagnet : MonoBehaviour
         InputManager.onMagnetOn += Activatemagnet;
         InputManager.onMagnetOff += StopMagnet;
 
-        //Set layer of current gameObject
-        gameObject.layer = LayerMask.NameToLayer("N");
-        onSwitchedPolarity?.Invoke(LayerMask.LayerToName(gameObject.layer));
-
-        //set color of player based on polarity
-        gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+        SwitchPolarity();
     }
     private void OnDisable() 
     {
@@ -129,9 +124,5 @@ public class PlayerMagnet : MonoBehaviour
             cooldown -= Time.deltaTime;
         }
             
-    }
-    private void OnDrawGizmos()
-    {
-        Debug.DrawRay( holder.position, holder.up * range, Color.green);
     }
 }
