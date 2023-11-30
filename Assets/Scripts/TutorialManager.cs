@@ -7,22 +7,14 @@ public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private TutorialPopUp[] popUps;
 
-    public void ShowTutorial(string nomDuPopUp)
+    public void ShowTutorial(string nomDuPopUp, bool afficher)
     {
         foreach (TutorialPopUp tutorial in popUps)
         {
             if (tutorial.nomDuPopUp == nomDuPopUp)
             {
-                tutorial.popUp.SetActive(true);
+                tutorial.popUp.SetActive(afficher);
             }
-        }
-    }
-
-    public void HideTutorial()
-    {
-        foreach (TutorialPopUp tutorial in popUps)
-        {
-            tutorial.popUp.SetActive(false);
         }
     }
 }
