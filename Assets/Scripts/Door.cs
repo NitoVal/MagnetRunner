@@ -20,12 +20,13 @@ public class Door : MonoBehaviour, IDoor
 
     Vector2 startPos;
     public Vector2 endPos;
-    [Range(1f, 5f)]
+    [Range(10f, 20f)]
     public float speed;
     void Awake()
     {
         startPos = transform.position;
         endPos.x = transform.position.x;
+        endPos.y += transform.position.y;
         if (doorType is ActivationType.PressurePlate)
         {
             PressurePlate.onPressingPlate += OpenDoor; 
@@ -45,9 +46,9 @@ public class Door : MonoBehaviour, IDoor
     private void Update()
     {
         if (isOpen)
-            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * speed); //Toutes les portes se ferment slowly
+            transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * speed); 
         else
-            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * speed); //Toutes les portes s'ouvrent vite
+            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * speed/15);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
