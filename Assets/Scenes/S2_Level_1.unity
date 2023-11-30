@@ -6362,7 +6362,7 @@ GameObject:
   - component: {fileID: 1593439855}
   - component: {fileID: 1593439857}
   - component: {fileID: 1593439856}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Terrain (Collider)
   m_TagString: Jumpable
   m_Icon: {fileID: 0}
@@ -46934,6 +46934,10 @@ PrefabInstance:
     - target: {fileID: 2612635451177066974, guid: bc93b67842a48ca4ab71f384d55c2297, type: 3}
       propertyPath: m_AnchorMin.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739415248837345143, guid: bc93b67842a48ca4ab71f384d55c2297, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -49.517944
       objectReference: {fileID: 0}
     - target: {fileID: 6066648236598959929, guid: bc93b67842a48ca4ab71f384d55c2297, type: 3}
       propertyPath: m_Name

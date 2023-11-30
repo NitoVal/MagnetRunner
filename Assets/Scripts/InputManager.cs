@@ -10,8 +10,6 @@ public class InputManager : MonoBehaviour
 
     public static event Action<float> onMove;
     public static event Action onJumpPressed;
-    public static event Action onCrouchPressed;
-    public static event Action onCrouchCanceled;
     public static event Action onSwitchPolarity;
     public static event Action onMagnetOn;
     public static event Action onMagnetOff;
@@ -28,9 +26,6 @@ public class InputManager : MonoBehaviour
 
         actions.Player.Jump.performed += OnJumpPressed;
 
-        actions.Player.Crouch.performed += OnCrouchPressed;
-        actions.Player.Crouch.canceled += OnCrouchCanceled;
-
         actions.Player.SwitchPolarity.performed += OnSwitchPolarity;
 
         actions.Player.Activatemagnet.performed += OnActivateMagnet;
@@ -46,9 +41,6 @@ public class InputManager : MonoBehaviour
         actions.Player.Movement.canceled -= OnMovePressed;
 
         actions.Player.Jump.performed -= OnJumpPressed;
-
-        actions.Player.Crouch.performed -= OnCrouchPressed;
-        actions.Player.Crouch.canceled -= OnCrouchCanceled;
 
         actions.Player.SwitchPolarity.performed -= OnSwitchPolarity;
 
@@ -71,10 +63,6 @@ public class InputManager : MonoBehaviour
     {
         onMove?.Invoke(obj.ReadValue<float>());
     }
-    private void OnCrouchCanceled(InputAction.CallbackContext obj)
-    {
-        onCrouchCanceled?.Invoke();
-    }
     private void OnStopMagnet(InputAction.CallbackContext obj)
     {
         onMagnetOff?.Invoke();
@@ -90,9 +78,5 @@ public class InputManager : MonoBehaviour
     public void OnActivateMagnet(InputAction.CallbackContext obj)
     {
         onMagnetOn?.Invoke();
-    }
-    public void OnCrouchPressed(InputAction.CallbackContext obj)
-    {
-        onCrouchPressed?.Invoke();
     }
 }

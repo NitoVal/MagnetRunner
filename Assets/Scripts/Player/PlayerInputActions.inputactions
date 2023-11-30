@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "bf43b82f-96a5-4eb8-991e-c01a1b19e8e3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold(duration=1.401298E-45,pressPoint=0.5)",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Activate magnet",
                     "type": "Button",
                     "id": "3a261544-b564-4079-b8f8-59aeca6d7b81",
@@ -111,17 +102,6 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d3bdd551-9e56-405b-9b71-e4f5cdef1371",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

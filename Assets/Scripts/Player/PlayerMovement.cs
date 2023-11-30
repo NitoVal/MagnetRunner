@@ -31,15 +31,11 @@ public class PlayerMovement : MonoBehaviour
         //Initializing input
         InputManager.onMove += OnMovePlayer;
         InputManager.onJumpPressed += Jump;
-        InputManager.onCrouchPressed += Crouch;
-        InputManager.onCrouchCanceled += CancelCrouch;
     }
     void OnDisable()
     {
         InputManager.onMove -= OnMovePlayer;
         InputManager.onJumpPressed -= Jump;
-        InputManager.onCrouchPressed -= Crouch;
-        InputManager.onCrouchCanceled -= CancelCrouch;
     }
     private void Update()
     {   
@@ -73,18 +69,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.up * jumpForce;
         //play animation
     }
-    private void Crouch()
-    {
-        //play animation
-        transform.localScale -= new Vector3(0,5, 0);
-        this.transform.position -= new Vector3(0,0.6f,0);
-    } //TO REDO
-    private void CancelCrouch()
-    {
-        //play animation
-        transform.localScale += new Vector3(0,5f,0);
-        this.transform.position += new Vector3(0,0.5f, 0);
-    } //TO REDO
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Jumpable"))
