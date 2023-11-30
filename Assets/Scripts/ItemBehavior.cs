@@ -17,9 +17,8 @@ public class ItemBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (this.name != "TrophéeRécompense")
+            if (gameObject.name != "TrophéeRécompense")
             {
-                Debug.Log("Collected");
                 AudioManager.Singleton.PlaySound("Collectible");
                 levelManager.ItemCollected++;
                 collectibleNumber.text = levelManager.ItemCollected.ToString();
@@ -28,7 +27,6 @@ public class ItemBehavior : MonoBehaviour
             }
             else
             {
-                Debug.Log("Goal obtained");
                 levelManager.GoalItemCollected++;
                 Destroy(gameObject);
             }
