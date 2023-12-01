@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    bool isPaused;
+    bool isPaused = false;
     public GameObject pauseMenuCanvas;
     public GameObject pauseCanvas;
     public GameObject optionMenuCanvas;
+    public GameObject winUI;
+    public GameObject loseUI;
 
     private void Awake()
     {
@@ -21,6 +23,9 @@ public class PauseMenu : MonoBehaviour
     }
     public void PauseGame()
     {
+        if (winUI.activeSelf || loseUI.activeSelf)
+
+            return;
         if (isPaused)
         {
             isPaused = false;
@@ -41,7 +46,8 @@ public class PauseMenu : MonoBehaviour
     }
     public void RestartLevel() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
     public void MainMenu(){ SceneManager.LoadScene(0); }
 }

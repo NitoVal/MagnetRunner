@@ -15,9 +15,6 @@ public class AudioManager : MonoBehaviour
         if (Singleton == null)
         {
             Singleton = this;
-
-            // Permet au game object de rester d'une scene a l'autre (persistant)
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

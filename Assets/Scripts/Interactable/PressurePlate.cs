@@ -13,7 +13,7 @@ public class PressurePlate : MonoBehaviour
     {
         AudioManager.Singleton.PlaySound("OpenDoor");
         onPressingPlate?.Invoke(id);
-        CameraEffects.Singleton.ShakeCamera(1f, 5f);
+        CameraEffects.Singleton.ShakeCamera(0.5f, 5f);
     }
     private void OnTriggerExit2D(Collider2D other)
     {
