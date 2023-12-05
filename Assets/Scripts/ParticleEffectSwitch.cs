@@ -10,6 +10,8 @@ public class ParticleEffectSwitch : MonoBehaviour
     void Awake()
     {
         PlayerMagnet.onSwitchedPolarity += ChangeParticleEffect;
+        plusVFX.Stop();
+        minusVFX.Stop();
     }
     private void OnDisable()
     {

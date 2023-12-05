@@ -10,7 +10,8 @@ public class Door : MonoBehaviour, IDoor
         Key,
         TriggerArea,
         Button,
-        Lever
+        Lever,
+        ButtonCollision
     }
     [HideInInspector] public ActivationType doorType;
     [HideInInspector] public Key.KeyType keyType; //only when door type is a Key
@@ -22,6 +23,8 @@ public class Door : MonoBehaviour, IDoor
     public Vector2 endPos;
     [Range(10f, 20f)]
     public float speed;
+    [Range(1, 15)]
+    public int closingSpeed;
     void Awake()
     {
         startPos = transform.position;
@@ -42,13 +45,17 @@ public class Door : MonoBehaviour, IDoor
             LeverInteractable.OnLeverUp += OpenDoor;
             LeverInteractable.OnLeverDown += CloseDoor;
         }
+        if (doorType is ActivationType.ButtonCollision)
+        {
+            ButtonTrigger.onButtonHit += OpenDoor;
+        }
     }
     private void Update()
     {
         if (isOpen)
             transform.position = Vector2.MoveTowards(transform.position, endPos, Time.deltaTime * speed); 
         else
-            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * speed/15);
+            transform.position = Vector2.MoveTowards(transform.position, startPos, Time.deltaTime * speed/closingSpeed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

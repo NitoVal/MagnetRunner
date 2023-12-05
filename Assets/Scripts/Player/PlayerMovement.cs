@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Jumpable"))
+        if (other.gameObject.CompareTag("Jumpable") || other.gameObject.CompareTag("Box"))
             IsGrounded = true;
     }
     private void OnTriggerExit2D(Collider2D other)

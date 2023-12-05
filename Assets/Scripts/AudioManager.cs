@@ -13,13 +13,9 @@ public class AudioManager : MonoBehaviour
         PlaySound("Victoria");
 
         if (Singleton == null)
-        {
             Singleton = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
     #endregion
 

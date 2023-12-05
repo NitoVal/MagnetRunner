@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
 
     // Attributes
+    public static LevelManager Singleton;
     private byte itemCollected = 0;
     private byte goalItemCollected = 0;
     [SerializeField] private float remainingTime = 50f;
@@ -66,6 +67,10 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         timerEnable = true;
+        if (Singleton == null)
+            Singleton = this;
+        else
+            Destroy(gameObject);
     }
 
     // Methods
