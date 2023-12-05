@@ -10,7 +10,7 @@ public class ItemBehavior : MonoBehaviour
     [Header("Needed Components")]
     public TMP_Text collectibleNumber;
     public LevelManager levelManager;
-
+    public float extraTimeBonus;
 
     //Methods
     public void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +22,7 @@ public class ItemBehavior : MonoBehaviour
                 AudioManager.Singleton.PlaySound("Collectible");
                 levelManager.ItemCollected++;
                 collectibleNumber.text = levelManager.ItemCollected.ToString();
-                levelManager.RemainingTime += 5f;
+                levelManager.RemainingTime += extraTimeBonus;
                 Destroy(gameObject);
             }
             else

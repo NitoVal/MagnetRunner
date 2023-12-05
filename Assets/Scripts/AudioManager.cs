@@ -48,7 +48,6 @@ public class AudioManager : MonoBehaviour
                 return;
             }
         }
-
         AudioSource source = CreateNewAudioSource();
         source.clip = soundClip;
         source.Play();

@@ -8,6 +8,10 @@ public class MagneticPlatform : MonoBehaviour
     { 
         ButtonTrigger.onButtonHit += DisableEffectors;
     }
+    private void OnDisable()
+    {
+        ButtonTrigger.onButtonHit -= DisableEffectors;
+    }
     private void DisableEffectors()
     {
         GameObject nForceEffector = transform.Find("GzoneN").gameObject;

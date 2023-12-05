@@ -11,10 +11,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject optionMenuCanvas;
     public GameObject winUI;
     public GameObject loseUI;
+    public GameObject objectiveUI;
+    public GameObject timerUI;
+    public GameObject collectibleUI;
 
     private void Awake()
     {
         isPaused = false;
+        Time.timeScale = 1f;
         InputManager.onPause += PauseGame;
     }
     private void OnDisable()
@@ -33,6 +37,9 @@ public class PauseMenu : MonoBehaviour
             pauseMenuCanvas.SetActive(isPaused);
             pauseCanvas.SetActive(isPaused);
             optionMenuCanvas.SetActive(!isPaused);
+            timerUI.SetActive(!isPaused);
+            objectiveUI.SetActive(!isPaused);
+            collectibleUI.SetActive(!isPaused);
         }
         else
         {
@@ -41,12 +48,16 @@ public class PauseMenu : MonoBehaviour
             pauseMenuCanvas.SetActive(isPaused);
             pauseCanvas.SetActive(isPaused);
             optionMenuCanvas.SetActive(!isPaused);
+            timerUI.SetActive(!isPaused);
+            objectiveUI.SetActive(!isPaused);
+            collectibleUI.SetActive(!isPaused);
         }
 
     }
     public void RestartLevel() 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        isPaused = false;
         Time.timeScale = 1f;
     }
     public void MainMenu(){ SceneManager.LoadScene(0); }

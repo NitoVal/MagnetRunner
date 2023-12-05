@@ -6,12 +6,10 @@ using UnityEngine;
 public class ButtonTrigger : MonoBehaviour
 {
     public static event Action onButtonHit;
-    bool isHit = false;
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Box") && !isHit)
+        if (other.gameObject.CompareTag("Box"))
         {
-            isHit = true;
             onButtonHit?.Invoke();
             gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         }

@@ -10,6 +10,7 @@ TagManager:
   - RecompenseFin
   - MagneticPlatformConstant2
   - Box
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -79,4 +79,13 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Jumpable"))
             IsGrounded = false;
     }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Vector2 difference = (transform.position - other.transform.position).normalized;
+            Vector2 force = difference * 30f;
+            rb.AddForce(force, ForceMode2D.Impulse);
+        }
+    }
 }
