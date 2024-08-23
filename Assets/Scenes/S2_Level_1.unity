@@ -11509,9 +11509,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3081869483368875841, guid: dccdf91c5360a3a48b839fe23ab05d25, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1507216902}
     - targetCorrespondingSourceObject: {fileID: 4888511549410347097, guid: dccdf91c5360a3a48b839fe23ab05d25, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1047916067}
@@ -11524,24 +11521,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2288592724970532408, guid: dccdf91c5360a3a48b839fe23ab05d25, type: 3}
   m_PrefabInstance: {fileID: 1507216899}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1507216901 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3081869483368875841, guid: dccdf91c5360a3a48b839fe23ab05d25, type: 3}
-  m_PrefabInstance: {fileID: 1507216899}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1507216902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507216901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e0c25ebc246ee4490c1ea6c3495a76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Pkey: {fileID: 0}
 --- !u!1001 &1518206903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65235,6 +65214,10 @@ PrefabInstance:
     - target: {fileID: 3110067969645934550, guid: bc93b67842a48ca4ab71f384d55c2297, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081829868635620421, guid: bc93b67842a48ca4ab71f384d55c2297, type: 3}
+      propertyPath: m_text
+      value: "Atteignez le troph\xE9e le plus rapidement possible!"
       objectReference: {fileID: 0}
     - target: {fileID: 4571434505242213996, guid: bc93b67842a48ca4ab71f384d55c2297, type: 3}
       propertyPath: m_AnchorMax.y

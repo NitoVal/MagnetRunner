@@ -10,12 +10,16 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        PlaySound("Victoria");
-
         if (Singleton == null)
+        {
             Singleton = this;
+            DontDestroyOnLoad(this.gameObject);  
+            PlaySound("Victoria"); 
+        }
         else
+        {
             Destroy(gameObject);
+        }
     }
     #endregion
 
@@ -44,12 +48,14 @@ public class AudioManager : MonoBehaviour
             if (!audioSource.isPlaying)
             {
                 audioSource.clip = soundClip;
+                audioSource.loop = (soundClip.name == "Victoria"); 
                 audioSource.Play();
                 return;
             }
         }
         AudioSource source = CreateNewAudioSource();
         source.clip = soundClip;
+        source.loop = (soundClip.name == "Victoria");  
         source.Play();
     }
 
