@@ -8,62 +8,72 @@ public class MovingPlatform : MonoBehaviour
     public GameObject[] waypoints;
     private int currentWaypointIndex = 0;
 
-    public bool isAutomatic;
-
+    [Range(25f, 65f)]
     public float speed;
-    public float intervalBetweenPoint; //in seconds
+
+    [Range(0, 3f)]
+    public float intervalBetweenPoint;
 
     float temp;
-    public List<Rigidbody2D> rbList;
-
-    private void Awake()
+    List<Rigidbody2D> rbList;
+    void Awake()
     {
-        transform.position = waypoints[0].transform.position;
+        if (waypoints.Length != 0)
+            transform.position = waypoints[0].transform.position;
+
+        rbList = new List<Rigidbody2D>();
     }
     void Update()
     {
-        if (rbList != null)
+        if (waypoints.Length != 0)
         {
-            foreach (Rigidbody2D rbP in rbList)
+            CheckDistance();
+            transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+        }
+    }
+    private void CheckDistance()
+    {
+        if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
+        {
+            if (temp <= intervalBetweenPoint)
+                temp += Time.deltaTime;
+            else
             {
-                rbP.interpolation = RigidbodyInterpolation2D.Extrapolate;
-                if (rbP.velocity.x != 0)
-                    rbP.gameObject.transform.SetParent(null, true);
-                else
-                    rbP.gameObject.transform.SetParent(transform, true);
+                temp = 0;
+                currentWaypointIndex++;
+                if (currentWaypointIndex >= waypoints.Length)
+                    currentWaypointIndex = 0;
             }
         }
-        if (isAutomatic)
-        {
-            if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
-            {
-                if (temp <= intervalBetweenPoint)
-                    temp += Time.deltaTime;
-                else
-                {
-                    temp = 0;
-                    currentWaypointIndex++;
-                    if (currentWaypointIndex >= waypoints.Length)
-                        currentWaypointIndex = 0;
-                }
-            }
-        }
-        transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("GroundCheck"))
+            return;
         other.gameObject.transform.SetParent(transform, true);
-        if (other.attachedRigidbody)
+        if (other.attachedRigidbody != null)
         {
             rbList.Add(other.attachedRigidbody);
+            other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Extrapolate;
         }
+        else
+            return;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        other.gameObject.transform.SetParent(null, true);
-        if (other.attachedRigidbody)
+        if (other.gameObject.CompareTag("GroundCheck"))
+            return;
+        other.gameObject.transform.SetParent(null);
+        if (other.attachedRigidbody != null)
         {
-            rbList.Remove(other.attachedRigidbody);
+           other.attachedRigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
+           rbList.Remove(other.attachedRigidbody);
         }
+        else
+           return;
+    }
+    private void OnApplicationQuit()
+    {
+        transform.DetachChildren();
     }
 }

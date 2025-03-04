@@ -5,12 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
+  - Jumpable
+  - GroundCheck
   - RecompenseFin
+  - MagneticPlatformConstant2
+  - Box
+  - Obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - GroundCheck
   - Water
   - UI
   - N
@@ -42,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Layer1
+    uniqueID: 4112246057
     locked: 0

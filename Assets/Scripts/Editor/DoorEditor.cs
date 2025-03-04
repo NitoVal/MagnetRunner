@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CustomEditor(typeof(Door))]
@@ -21,11 +22,6 @@ public class DoorEditor : Editor
             case Door.ActivationType.Key:
                 door.keyType = (Key.KeyType)EditorGUILayout.EnumPopup("Key type", door.keyType);
                 break;
-            case Door.ActivationType.TriggerArea:
-                EditorGUILayout.BeginHorizontal();
-                door.triggerArea = (Collider2D)EditorGUILayout.ObjectField(door.triggerArea, typeof(Collider2D), true);
-                EditorGUILayout.EndHorizontal();
-                break;
             case Door.ActivationType.Button:
                 door.id = EditorGUILayout.IntField("Id", door.id);
                 break;
@@ -34,6 +30,11 @@ public class DoorEditor : Editor
                 break;
             default:
                 break;
+        }
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(door);
+            EditorSceneManager.MarkSceneDirty(door.gameObject.scene);
         }
     }
 }

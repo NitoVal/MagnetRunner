@@ -10,8 +10,6 @@ public class InputManager : MonoBehaviour
 
     public static event Action<float> onMove;
     public static event Action onJumpPressed;
-    public static event Action onCrouchPressed;
-    public static event Action onCrouchCanceled;
     public static event Action onSwitchPolarity;
     public static event Action onMagnetOn;
     public static event Action onMagnetOff;
@@ -28,9 +26,6 @@ public class InputManager : MonoBehaviour
 
         actions.Player.Jump.performed += OnJumpPressed;
 
-        actions.Player.Crouch.performed += OnCrouchPressed;
-        actions.Player.Crouch.canceled += OnCrouchCanceled;
-
         actions.Player.SwitchPolarity.performed += OnSwitchPolarity;
 
         actions.Player.Activatemagnet.performed += OnActivateMagnet;
@@ -39,6 +34,22 @@ public class InputManager : MonoBehaviour
         actions.Player.Interact.performed += OnInteract;
 
         actions.Player.Pause.performed += OnPause;
+    }
+    void OnDisable()
+    {
+        actions.Player.Movement.performed -= OnMovePressed;
+        actions.Player.Movement.canceled -= OnMovePressed;
+
+        actions.Player.Jump.performed -= OnJumpPressed;
+
+        actions.Player.SwitchPolarity.performed -= OnSwitchPolarity;
+
+        actions.Player.Activatemagnet.performed -= OnActivateMagnet;
+        actions.Player.Activatemagnet.canceled -= OnStopMagnet;
+
+        actions.Player.Interact.performed -= OnInteract;
+
+        actions.Player.Pause.performed -= OnPause;
     }
     private void OnPause(InputAction.CallbackContext obj)
     {
@@ -51,10 +62,6 @@ public class InputManager : MonoBehaviour
     private void OnMovePressed(InputAction.CallbackContext obj)
     {
         onMove?.Invoke(obj.ReadValue<float>());
-    }
-    private void OnCrouchCanceled(InputAction.CallbackContext obj)
-    {
-        onCrouchCanceled?.Invoke();
     }
     private void OnStopMagnet(InputAction.CallbackContext obj)
     {
@@ -71,9 +78,5 @@ public class InputManager : MonoBehaviour
     public void OnActivateMagnet(InputAction.CallbackContext obj)
     {
         onMagnetOn?.Invoke();
-    }
-    public void OnCrouchPressed(InputAction.CallbackContext obj)
-    {
-        onCrouchPressed?.Invoke();
     }
 }

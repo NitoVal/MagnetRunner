@@ -8,19 +8,28 @@ public class ItemBehavior : MonoBehaviour
 {
     //Attribute
     [Header("Needed Components")]
-    [SerializeField] TMP_Text collectibleNumber;
-    [SerializeField] LevelManager levelManager;
-
+    public TMP_Text collectibleNumber;
+    public LevelManager levelManager;
+    public float extraTimeBonus;
 
     //Methods
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collision");
-            levelManager.ItemCollected++;
-            collectibleNumber.text = levelManager.ItemCollected.ToString();
-            Destroy(gameObject);
+            if (!gameObject.CompareTag("RecompenseFin"))
+            {
+                AudioManager.Singleton.PlaySound("Collectible");
+                levelManager.ItemCollected++;
+                collectibleNumber.text = levelManager.ItemCollected.ToString();
+                levelManager.RemainingTime += extraTimeBonus;
+                Destroy(gameObject);
+            }
+            else
+            {
+                levelManager.GoalItemCollected++;
+                Destroy(gameObject);
+            }
         }
     }
 }
